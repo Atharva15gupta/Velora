@@ -4,13 +4,13 @@ import { PRICING_PLANS, PLAN_COMPARISONS } from "@/constants/pricing.constants";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check } from "lucide-react";
-import useRazorpay from "react-razorpay";
+import { useRazorpay } from "react-razorpay";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 
 export const PricingView = () => {
   const router = useRouter();
-  const [Razorpay] = useRazorpay();
+  const { Razorpay } = useRazorpay();
   const { user } = useUser();
 
   const handleSubscribe = async (planName: string) => {
@@ -28,7 +28,7 @@ export const PricingView = () => {
       
       const { subscriptionId } = await response.json();
       
-      const options = {
+      const options: any = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         subscription_id: subscriptionId,
         name: "Velora AI",

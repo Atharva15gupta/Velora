@@ -7,18 +7,10 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const [queryClient] = useState(() => new QueryClient());
   const dehydratedState = dehydrate(queryClient);
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-
-  if (!clientId) {
-    throw new Error(
-      "Missing NEXT_PUBLIC_GOOGLE_CLIENT_ID environment variable"
-    );
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -31,9 +23,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
           disableTransitionOnChange
           enableColorScheme
         >
-          <GoogleOAuthProvider clientId={clientId}>
-            {children}
-          </GoogleOAuthProvider>
+          {children}
         </NextThemesProvider>
       </HydrationBoundary>
     </QueryClientProvider>
