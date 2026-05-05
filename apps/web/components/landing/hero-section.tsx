@@ -108,7 +108,7 @@ export const HeroSection = () => {
             size="lg"
             className="rounded-full bg-emerald-800 px-6 text-white hover:bg-emerald-900"
           >
-            <Link href="/signup">
+            <Link href="/sign-up">
               Get Started
               <ArrowRight className="size-4" />
             </Link>

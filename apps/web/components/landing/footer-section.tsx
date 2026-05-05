@@ -17,8 +17,8 @@ const footerGroups = [
   {
     title: "Resources",
     links: [
-      { label: "Get Started", href: "/signup" },
-      { label: "Login", href: "/login" },
+      { label: "Get Started", href: "/sign-up" },
+      { label: "Login", href: "/sign-in" },
     ],
   },
   {

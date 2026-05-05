@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { Button } from "@workspace/ui/components/button";
@@ -47,13 +47,13 @@ export const Navbar = () => {
             variant="ghost"
             className="text-neutral-600 md:inline-flex hover:bg-transparent"
           >
-            <Link href="/login">Login</Link>
+            <Link href="/sign-in">Login</Link>
           </Button>
           <Button
             asChild
             className="rounded-full bg-emerald-800 px-5 text-white hover:bg-emerald-900 "
           >
-            <Link href="/signup">Get Started</Link>
+            <Link href="/sign-up">Get Started</Link>
           </Button>
         </div>
       </div>
