@@ -1,0 +1,16 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign Up",
+  description: "Create a new Velora account to build intelligent chat widgets and elevate your customer support experience.",
+};
+
+import { SignupView } from '@/views/auth/signup-view'
+
+const Signup = () => {
+  return (
+    <SignupView />
+  )
+}
+
+export default Signup

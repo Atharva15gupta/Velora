@@ -1,0 +1,167 @@
+"use client";
+
+import { Link } from "next-view-transitions";
+import { Button } from "@workspace/ui/components/button";
+import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import { HeroIllustration } from "./hero-illustration";
+
+export const supportFlow = [
+  {
+    query: "How many pricing plans do you offer?",
+    reply:
+      "We offer two plans: Starter and Pro, designed to scale with your needs.",
+  },
+  {
+    query: "Do you offer a free trial?",
+    reply: "We currently do not offer a free trial.",
+  },
+  {
+    query: "Can I customize the chat widget?",
+    reply:
+      "Yes, you can customize the widget to match your brand and product experience.",
+  },
+  // {
+  //   query: "How do I train the AI on my data?",
+  //   reply:
+  //     "You can add your website or upload docs and FAQs to train Velora.",
+  // },
+  // {
+  //   query: "Can I take over conversations from the AI?",
+  //   reply:
+  //     "Yes, you can step in anytime and manage conversations from the inbox.",
+  // },
+  // {
+  //   query: "Does Velora support React or Next.js?",
+  //   reply:
+  //     "Yes, Velora integrates easily with HTML, React, Next.js, and more.",
+  // },
+];
+
+const heroContainerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      delayChildren: 0.6,
+      staggerChildren: 0.18,
+    },
+  },
+} as const;
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+} as const;
+
+const lowerSectionVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      delayChildren: 1.2,
+      staggerChildren: 0.2,
+    },
+  },
+} as const;
+
+const lowerColumnVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+} as const;
+
+export const HeroSection = () => {
+  return (
+    <section className="grid grid-cols-1 divide-y divide-neutral-300 divide-dashed border-b border-neutral-300 border-dashed">
+      <motion.div
+        variants={heroContainerVariants}
+        initial="hidden"
+        animate="show"
+        className="flex flex-col gap-4.5 sm:gap-6 sm:items-center justify-center pt-25 sm:pt-40 sm:pb-20 pb-10 px-7"
+      >
+        <div className="flex flex-col gap-4 sm:gap-5 sm:items-center sm:justify-center">
+          <HeroIllustration className="block sm:hidden h-auto w-full max-w-[300px] rounded-md mx-auto mb-15" />
+          <motion.h1
+            variants={heroItemVariants}
+            className="max-w-sm sm:max-w-5xl text-[1.7rem] sm:text-5xl sm:text-center font-medium tracking-tight text-emerald-800 md:text-6xl font-serif leading-[1.09]"
+          >
+            AI support agent that actually understands your business
+          </motion.h1>
+          <motion.p
+            variants={heroItemVariants}
+            className="max-w-xs sm:max-w-lg text-xs sm:text-base leading-snug text-left sm:text-center text-neutral-600 md:text-base tracking-tight"
+          >
+            Transform your product knowledge into an AI agent that answers
+            instantly and intelligently.
+          </motion.p>
+        </div>
+
+        <motion.div variants={heroItemVariants} className="flex gap-3">
+          <Button
+            asChild
+            size="lg"
+            className="rounded-full bg-emerald-800 px-6 text-white hover:bg-emerald-900"
+          >
+            <Link href="/signup">
+              Get Started
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="rounded-full hidden sm:flex border-neutral-300 bg-white/80 px-6 text-neutral-700 hover:bg-white"
+          >
+            <Link target="_blank" href="https://youtu.be/baSL9e6Nb-Q">View Demo</Link>
+          </Button>
+        </motion.div>
+      </motion.div>
+      <motion.div
+        variants={lowerSectionVariants}
+        initial="hidden"
+        animate="show"
+        className="w-full grid-cols-3 divide-x divide-dashed divide-neutral-300 hidden sm:grid"
+      >
+        <motion.div
+          variants={lowerColumnVariants}
+          className="flex justify-center items-center flex-col gap-3"
+        >
+          {supportFlow.map((item, index) => (
+            <div
+              key={index}
+              className="flex px-3 py-2 border-[1.5px] border-neutral-300 bg-white/40 rounded-lg font-semibold text-xs text-neutral-500"
+            >
+              {item.query}
+            </div>
+          ))}
+        </motion.div>
+        <motion.div
+          variants={lowerColumnVariants}
+          className="flex flex-col items-center justify-center pt-25 pb-21 px-10 bg-amber-50"
+        >
+          <HeroIllustration className="block h-auto w-full max-w-[400px] rounded-md" />
+        </motion.div>
+        <motion.div
+          variants={lowerColumnVariants}
+          className="flex justify-center items-center flex-col gap-3"
+        >
+          {supportFlow.map((item, index) => (
+            <div
+              key={index}
+              className="flex px-4 py-3 bg-emerald-700 text-white font-semibold rounded-2xl text-xs max-w-2xs"
+            >
+              {item.reply}
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};

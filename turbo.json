@@ -1,0 +1,52 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "APP_URL",
+    "CORS_ORIGINS",
+    "DATABASE_URL",
+    "DODO_API_KEY",
+    "DODO_PRO_PRODUCT_ID",
+    "DODO_STARTER_PRODUCT_ID",
+    "FIRECRAWL_API_KEY",
+    "GROQ_API_KEY",
+    "JINA_API_KEY",
+    "JWT_SECRET",
+    "QDRANT_API_KEY",
+    "QDRANT_URL",
+    "THREADS_DB_URL",
+    "WEBHOOK_SECRET",
+    "PORT",
+    "GOOGLE_API_KEY",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GOOGLE_REDIRECT_URI"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:deploy": {
+      "cache": false
+    }
+  }
+}
