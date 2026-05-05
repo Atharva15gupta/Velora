@@ -1,9 +1,10 @@
-// import { Router } from "express";
-// import { webhookController } from "../controllers/webhook.controller";
-// import express from "express";
+import { Router } from "express";
+import { clerkWebhook, razorpayWebhook } from "../controllers/webhook.controller";
+import express from "express";
 
-// const route:Router = Router();
+const route: Router = Router();
 
-// route.post('/dodo', express.raw({ type: "application/json" }), webhookController);
+route.post('/clerk', express.raw({ type: "application/json" }), clerkWebhook);
+route.post('/razorpay', express.raw({ type: "application/json" }), razorpayWebhook);
 
-// export default route;
+export default route;

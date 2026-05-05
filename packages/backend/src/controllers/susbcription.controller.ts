@@ -1,49 +1,37 @@
 import { Request, Response } from "express";
-import { setSubscriptionCookie } from "../utils/auth/setSubscriptionCookie";
 import { prisma } from "@workspace/db";
+import Razorpay from "razorpay";
 
 export const createCheckoutSession = async (req: Request, res: Response) => {
   try {
     const { plan, userId } = req.body;
 
-    const productId =
+    const planId =
       plan === "STARTER"
-        ? process.env.DODO_STARTER_PRODUCT_ID
-        : process.env.DODO_PRO_PRODUCT_ID;
-    const base =
-      process.env.DODO_ENVIRONMENT === "live_mode"
-        ? "https://live.dodopayments.com"
-        : "https://test.dodopayments.com";
+        ? process.env.RAZORPAY_STARTER_PLAN_ID
+        : process.env.RAZORPAY_PRO_PLAN_ID;
 
-    const response = await fetch(`${base}/checkouts`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.DODO_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        product_cart: [
-          {
-            product_id: productId,
-            quantity: 1,
-          },
-        ],
-        return_url: `${process.env.APP_URL}/billing/success`,
-        cancel_url: `${process.env.APP_URL}/billing/cancel`,
-        feature_flags: {
-          redirect_immediately: true,
-        },
-        metadata: {
-          userId,
-          plan,
-        },
-      }),
+    if (!planId) {
+      return res.status(400).json({ error: "Invalid plan or missing environment variables." });
+    }
+
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_secret: process.env.RAZORPAY_KEY_SECRET!,
     });
 
-    const session = await response.json();
+    const subscription = await razorpay.subscriptions.create({
+      plan_id: planId as string,
+      customer_notify: 1,
+      total_count: 120, // E.g., 10 years of monthly billing
+      notes: {
+        userId,
+        plan,
+      },
+    });
 
     return res.json({
-      checkoutUrl: session.checkout_url,
+      subscriptionId: subscription.id,
     });
   } catch (err) {
     console.error(err);
@@ -52,8 +40,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
 };
 
 export const syncSubscription = async (req: Request, res: Response) => {
-  const userId = req.userId!;
-  await setSubscriptionCookie(userId, res);
+  // With Clerk, frontend handles its own session. Just return success.
   return res.status(200).json({ success: true });
 };
 

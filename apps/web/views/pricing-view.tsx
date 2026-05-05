@@ -4,9 +4,55 @@ import { PRICING_PLANS, PLAN_COMPARISONS } from "@/constants/pricing.constants";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check } from "lucide-react";
+import useRazorpay from "react-razorpay";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export const PricingView = () => {
   const router = useRouter();
+  const [Razorpay] = useRazorpay();
+  const { user } = useUser();
+
+  const handleSubscribe = async (planName: string) => {
+    if (!user) {
+      router.push("/sign-up");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: planName.toUpperCase(), userId: user.id }),
+      });
+      
+      const { subscriptionId } = await response.json();
+      
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+        subscription_id: subscriptionId,
+        name: "Velora AI",
+        description: `${planName} Plan Subscription`,
+        handler: function (response: any) {
+          toast.success("Payment successful!");
+          router.push("/get-started");
+        },
+        prefill: {
+          name: user.fullName || "",
+          email: user.primaryEmailAddress?.emailAddress || "",
+        },
+        theme: {
+          color: "#047857",
+        },
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error(error);
+      toast.error("Checkout failed. Please try again.");
+    }
+  };
 
   return (
      <div className="relative mx-auto flex w-full h-full max-w-7xl flex-col pt-6 sm:border-x border-dashed border-neutral-300 overflow-y-auto no-scrollbar bg-white/30">
@@ -54,14 +100,9 @@ export const PricingView = () => {
                   : "bg-emerald-800 text-white hover:bg-emerald-900"
                   }`}
                 type="button"
-                onClick={() => router.push("/get-started")}
-                disabled={
-                  plan.name === "Pro"
-                }
+                onClick={() => handleSubscribe(plan.name)}
               >
-                {plan.name === "Pro"
-                  ? "Coming Soon"
-                    : plan.cta}
+                {plan.cta}
               </button>
               <div className="grid gap-2">
                 {plan.features.map((feature) => (

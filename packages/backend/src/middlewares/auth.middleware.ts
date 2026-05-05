@@ -1,36 +1,25 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import { ClerkExpressRequireAuth, RequireAuthProp, StrictAuthProp } from "@clerk/clerk-sdk-node";
 
 declare global {
   namespace Express {
-    interface Request {
-      userId?: string;
-    }
+    interface Request extends StrictAuthProp {}
   }
 }
 
+// ClerkExpressRequireAuth returns a middleware function.
+// We export it as verifyAuth so the rest of the application routes don't need to change.
+// When using this, req.auth.userId will be available.
 export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const token = req.cookies.token;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ message: "Unauthorized: No token provided." });
+  // Clerk middleware will automatically handle unauthorized responses
+  ClerkExpressRequireAuth()(req, res, (err) => {
+    if (err) {
+      return next(err);
     }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-
-    if (!decoded) {
-      return res.status(401).json({ message: "Unauthorized: Invalid token." });
+    // To keep compatibility with existing routes expecting req.userId
+    if (req.auth && req.auth.userId) {
+      req.userId = req.auth.userId;
     }
-
-    const { userId } = decoded as { userId: string };
-
-    req.userId = userId;
     next();
-  } catch (error) {
-    console.error("Error verifying token:", error);
-    return res.status(500).json({ message: "Internal server error." });
-  }
+  });
 };
