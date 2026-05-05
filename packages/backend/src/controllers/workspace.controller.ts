@@ -1,6 +1,5 @@
 import { prisma } from "@workspace/db";
 import { Request, Response } from "express";
-import { setWorkspaceCookie } from "../utils/auth/setWorkspaceCookie";
 import { createCollection } from "../utils/file-processing/createCollection";
 import { getActiveSubscription } from "../utils/subscriptions/getActiveSubscription";
 
@@ -52,10 +51,7 @@ export const createWorkspace = async (req: Request, res: Response) => {
           brandName: newWorkspace.name,
         },
       });
-      await Promise.allSettled([
-        setWorkspaceCookie(userId, res),
-        createCollection(newWorkspace.id),
-      ]);
+      await createCollection(newWorkspace.id);
       return res.status(201).json({
         message: "Workspace created successfully",
         workspace: {

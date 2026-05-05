@@ -14,7 +14,7 @@ import widgetRouter from "./routes/widget.routes";
 import analyticsRouter from "./routes/analytics.route";
 import subscriptionRouter from "./routes/subscription.route";
 import notificationRouter from "./routes/notification.route";
-import { webhookController } from "./controllers/webhook.controller";
+import webhookRouter from "./routes/webhook.route";
 import { prisma } from "@workspace/db";
 
 dotenv.config();
@@ -35,7 +35,7 @@ app.use(
   })
 );
 
-app.post("/api/v1/webhook", express.raw({ type: "application/json" }), webhookController);
+app.use("/api/v1/webhooks", webhookRouter);
 
 // Middleware
 app.use(express.json({ limit: "10mb" }));

@@ -3,7 +3,9 @@ import { ClerkExpressRequireAuth, RequireAuthProp, StrictAuthProp } from "@clerk
 
 declare global {
   namespace Express {
-    interface Request extends StrictAuthProp {}
+    interface Request extends StrictAuthProp {
+      userId?: string;
+    }
   }
 }
 
