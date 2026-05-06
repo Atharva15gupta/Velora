@@ -13,6 +13,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useClerk } from "@clerk/nextjs";
 
 export function useSession() {
   return useQuery({
@@ -112,26 +113,28 @@ export const useLogout = () => {
   const queryClient = useQueryClient();
   const clearUser = useUserStore((s) => s.clearUser);
   const clearWorkspace = useWorkspaceStore((s) => s.clearWorkspace);
+  const { signOut } = useClerk();
 
   return useMutation({
-    mutationFn: logoutUser,
+    mutationFn: async () => {
+      await signOut();
+    },
     onSuccess: () => {
       clearUser();
       clearWorkspace();
       queryClient.removeQueries({ queryKey: ["user"] });
       queryClient.removeQueries({ queryKey: ["workspace"] });
-      router.push("/login");
+      router.push("/sign-in");
     },
     onError: (error) => {
       toast.error(
         `Logout error: ${error instanceof Error ? error.message : String(error)}`
       );
-      // Fallback clean up in case of a 401/error from API
       clearUser();
       clearWorkspace();
       queryClient.removeQueries({ queryKey: ["user"] });
       queryClient.removeQueries({ queryKey: ["workspace"] });
-      router.push("/login");
+      router.push("/sign-in");
     },
   });
 }
