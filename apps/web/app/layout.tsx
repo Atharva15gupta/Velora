@@ -28,7 +28,7 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://velora.10xshivam.dev";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://velora-web-blond.vercel.app";
 
 export const metadata = {
   metadataBase: new URL(BASE_URL),

@@ -52,22 +52,22 @@ export const HelpAndSupportView = () => {
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <ContactLink
-            href="https://x.com/10xshivam"
+            href="https://github.com/Atharva15gupta/Velora"
             icon={<IconBrandX className="size-4.5" />}
             label="X (Twitter)"
-            handle="@10xshivam"
+            handle="@Atharva15gupta"
           />
           <ContactLink
-            href="https://linkedin.com/in/10xshivam"
+            href="https://www.linkedin.com/in/atharva-gupta-71a016274/"
             icon={<IconBrandLinkedin className="size-4.5" />}
             label="LinkedIn"
-            handle="10xshivam"
+            handle="Atharva Gupta"
           />
           <ContactLink
-            href="https://github.com/10xshivam"
+            href="https://github.com/Atharva15gupta"
             icon={<IconBrandGithub className="size-4.5" />}
             label="GitHub"
-            handle="10xshivam"
+            handle="Atharva15gupta"
           />
         </div>
       </SectionCard>

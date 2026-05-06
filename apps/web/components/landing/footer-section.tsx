@@ -32,9 +32,9 @@ const footerGroups = [
   {
     title: "Socials",
     links: [
-      { label: "Github", href: "https://github.com/10xshivam/velora" },
-      { label: "LinkedIn", href: "https://linkedin.com/in/10xshivam" },
-      { label: "X.com", href: "https://x.com/10xshivam" },
+      { label: "Github", href: "https://github.com/Atharva15gupta/Velora" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/atharva-gupta-71a016274/" },
+      { label: "X.com", href: "https://github.com/Atharva15gupta/Velora" },
     ],
   },
 ] as const;
@@ -82,11 +82,11 @@ export function FooterSection() {
           <p className="text-xs text-neutral-500 font-medium tracking-tight">
             Designed & Developed by{" "}
             <Link
-              href="https://x.com/in/10xshivam"
+              href="https://www.linkedin.com/in/atharva-gupta-71a016274/"
               target="_top"
               className="text-neutral-400 font-medium"
             >
-              @10xshivam
+              @Atharva15gupta
             </Link>
           </p>
           <p className="text-xs text-neutral-400 flex items-center mt-0.5 tracking-tight">
