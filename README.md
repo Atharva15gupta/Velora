@@ -8,7 +8,7 @@
 
 Velora is a production-ready AI support agent that deeply understands your business context, documentation, and product knowledge. Built for modern SaaS companies, it transforms static resources into an interactive widget that remembers customer conversations, handles intelligent responses in real-time, and integrates seamlessly into your existing workflows without requiring complex AI infrastructure.
 
-![Velora Banner](apps/web/public/opengraph.png)
+![Velora Banner](apps/web/public/Screenshot.png)
 
 ## Features
 - **Flexible Integrations & AI Chat Widget**: Deploy an embeddable, responsive customer support widget across websites and apps (HTML, React, Next.js) with real-time streaming responses.
