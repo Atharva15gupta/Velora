@@ -1,7 +1,5 @@
 # <img src="apps/web/public/velora.png" alt="Velora Logo" width="45" align="top" /> Velora
 
-[![Visit Site](https://img.shields.io/badge/Visit_Site-velora.10xshivam.dev-blue?style=flat)](https://velora.10xshivam.dev) [![Live Demo](https://img.shields.io/badge/Live_Demo-YouTube-red?style=flat&logo=youtube)](https://youtu.be/baSL9e6Nb-Q) [![Stars](https://img.shields.io/github/stars/10xshivam/Velora?style=social)](https://github.com/10xshivam/Velora) [![Forks](https://img.shields.io/github/forks/10xshivam/Velora?style=social)](https://github.com/10xshivam/Velora/forks) [![Issues](https://img.shields.io/github/issues/10xshivam/Velora?style=flat)](https://github.com/10xshivam/Velora/issues) [![License MIT](https://img.shields.io/github/license/10xshivam/Velora?style=flat)](https://github.com/10xshivam/Velora/blob/main/LICENSE)
-
 > AI Agent that actually understands your business
 
 ## What is Velora
@@ -134,5 +132,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ---
 
 <div align="center">
-Made with love by Shivam
+Made with love by Atharva
 </div>
