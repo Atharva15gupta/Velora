@@ -1,14 +1,12 @@
 # <img src="apps/web/public/velora.png" alt="Velora Logo" width="45" align="top" /> Velora
 
-[![Visit Site](https://img.shields.io/badge/Visit_Site-velora.10xshivam.dev-blue?style=flat)](https://velora.10xshivam.dev) [![Live Demo](https://img.shields.io/badge/Live_Demo-YouTube-red?style=flat&logo=youtube)](https://youtu.be/baSL9e6Nb-Q) [![Stars](https://img.shields.io/github/stars/10xshivam/Velora?style=social)](https://github.com/10xshivam/Velora) [![Forks](https://img.shields.io/github/forks/10xshivam/Velora?style=social)](https://github.com/10xshivam/Velora/forks) [![Issues](https://img.shields.io/github/issues/10xshivam/Velora?style=flat)](https://github.com/10xshivam/Velora/issues) [![License MIT](https://img.shields.io/github/license/10xshivam/Velora?style=flat)](https://github.com/10xshivam/Velora/blob/main/LICENSE)
-
 > AI Agent that actually understands your business
 
 ## What is Velora
 
 Velora is a production-ready AI support agent that deeply understands your business context, documentation, and product knowledge. Built for modern SaaS companies, it transforms static resources into an interactive widget that remembers customer conversations, handles intelligent responses in real-time, and integrates seamlessly into your existing workflows without requiring complex AI infrastructure.
 
-![Velora Banner](apps/web/public/opengraph.png)
+![Velora Banner](apps/web/public/Screenshot.png)
 
 ## Features
 - **Flexible Integrations & AI Chat Widget**: Deploy an embeddable, responsive customer support widget across websites and apps (HTML, React, Next.js) with real-time streaming responses.
@@ -134,5 +132,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ---
 
 <div align="center">
-Made with love by Shivam
+Made with love by Atharva
 </div>
