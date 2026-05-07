@@ -1,27 +1,29 @@
 import { NextFunction, Request, Response } from "express";
-import { ClerkExpressRequireAuth, RequireAuthProp, StrictAuthProp } from "@clerk/clerk-sdk-node";
+import { clerkMiddleware, getAuth } from "@clerk/express";
 
 declare global {
   namespace Express {
-    interface Request extends StrictAuthProp {
+    interface Request {
       userId?: string;
     }
   }
 }
 
-// ClerkExpressRequireAuth returns a middleware function.
-// We export it as verifyAuth so the rest of the application routes don't need to change.
-// When using this, req.auth.userId will be available.
+// Use clerkMiddleware() globally to parse auth state without redirecting.
+// This replaces ClerkExpressRequireAuth which caused handshake redirects
+// that stripped API route paths.
+export const clerkAuth: any = clerkMiddleware();
+
+// verifyAuth checks for a valid session and returns 401 for unauthorized
+// requests instead of redirecting (which breaks API routes).
 export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
-  // Clerk middleware will automatically handle unauthorized responses
-  ClerkExpressRequireAuth()(req, res, (err) => {
-    if (err) {
-      return next(err);
-    }
-    // To keep compatibility with existing routes expecting req.userId
-    if (req.auth && req.auth.userId) {
-      req.userId = req.auth.userId;
-    }
-    next();
-  });
+  const auth = getAuth(req);
+
+  if (!auth || !auth.userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  // Keep compatibility with existing routes expecting req.userId
+  req.userId = auth.userId;
+  next();
 };

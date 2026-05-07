@@ -16,6 +16,7 @@ import subscriptionRouter from "./routes/subscription.route";
 import notificationRouter from "./routes/notification.route";
 import webhookRouter from "./routes/webhook.route";
 import { prisma } from "@workspace/db";
+import { clerkAuth } from "./middlewares/auth.middleware";
 
 dotenv.config();
 
@@ -36,6 +37,9 @@ app.use(
 );
 
 app.use("/api/v1/webhooks", webhookRouter);
+
+// Clerk auth middleware (parses auth state from Bearer tokens)
+app.use(clerkAuth);
 
 // Middleware
 app.use(express.json({ limit: "10mb" }));
