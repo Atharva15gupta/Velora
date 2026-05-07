@@ -1,7 +1,7 @@
 export const PRICING_PLANS = [
     {
         name: "Starter",
-        price: "$9",
+        price: "₹499",
         cadence: "/ month",
         blurb: "Perfect for small teams getting started.",
         cta: "Get Started",
@@ -19,7 +19,7 @@ export const PRICING_PLANS = [
     },
     {
         name: "Pro",
-        price: "$29",
+        price: "₹999",
         cadence: "/ month",
         blurb: "For scaling teams that need deeper insights.",
         cta: "Upgrade to Pro",
@@ -41,7 +41,7 @@ export const PRICING_PLANS = [
 ] as const;
 
 export const PLAN_COMPARISONS = [
-    { feature: "Price", starter: "$9 / month", pro: "$29 / month" },
+    { feature: "Price", starter: "₹499 / month", pro: "₹999 / month" },
     { feature: "Workspaces", starter: "1 Workspace", pro: "Up to 5 Workspaces" },
     { feature: "Chat Widget", starter: "Single Widget", pro: "Multiple Chat Widgets" },
     { feature: "AI Support", starter: "AI Customer Support Agent", pro: "AI Agent with Model Selection" },
