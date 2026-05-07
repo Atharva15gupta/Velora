@@ -5,13 +5,14 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check } from "lucide-react";
 import { useRazorpay } from "react-razorpay";
-import { useUser } from "@clerk/nextjs";
+import { useUser, useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
 
 export const PricingView = () => {
   const router = useRouter();
   const { Razorpay } = useRazorpay();
   const { user } = useUser();
+  const { getToken } = useAuth();
 
   const handleSubscribe = async (planName: string) => {
     if (!user) {
@@ -20,9 +21,13 @@ export const PricingView = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/checkout`, {
+      const token = await getToken();
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscription/billing/create-checkout`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ plan: planName.toUpperCase(), userId: user.id }),
       });
       

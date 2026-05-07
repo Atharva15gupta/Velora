@@ -11,6 +11,22 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+// Attach Clerk session token to every request
+axiosInstance.interceptors.request.use(async (config) => {
+  if (typeof window !== "undefined") {
+    try {
+      // @ts-ignore - Clerk exposes this on window after initialization
+      const token = await window.Clerk?.session?.getToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (e) {
+      // Token fetch failed, proceed without auth header
+    }
+  }
+  return config;
+});
+
 axiosInstance.interceptors.response.use(
   (response) => {
     if (response.data && response.data.error) {
