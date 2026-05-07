@@ -52,7 +52,7 @@ export function PricingSection() {
             Starts from
           </p>
           <p className="text-8xl md:text-9xl font-bold tracking-tighter font-mono opacity-10">
-            $9
+            ₹499
           </p>
           <p className="text-xs md:text-sm text-neutral-400 text-end tracking-tight">
             per month

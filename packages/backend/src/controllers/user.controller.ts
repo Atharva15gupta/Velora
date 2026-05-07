@@ -38,13 +38,20 @@ export const updateCurrentUser = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Unauthorized." });
     }
 
-    const { firstName, lastName } = req.body;
+    const { firstName, lastName, email } = req.body;
 
-    const user = await prisma.user.update({
+    // Use upsert in case the Clerk webhook hasn't synced the user yet
+    const user = await prisma.user.upsert({
       where: { id: userId },
-      data: {
+      update: {
         ...(firstName !== undefined && { firstName }),
         ...(lastName !== undefined && { lastName }),
+      },
+      create: {
+        id: userId,
+        firstName: firstName || "",
+        lastName: lastName || "",
+        email: email || "",
       },
     });
 
