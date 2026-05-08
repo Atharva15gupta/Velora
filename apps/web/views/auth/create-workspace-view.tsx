@@ -20,7 +20,8 @@ export const CreateWorkspaceView = () => {
   });
 
   return (
-    <div className="w-fit h-full flex flex-col items-center justify-center border border-neutral-300 border-dashed p-7 bg-white/40">
+    <div className="w-full min-h-screen flex items-center justify-center bg-amber-50 p-4">
+      <div className="w-full max-w-lg flex flex-col items-center justify-center border border-neutral-300 border-dashed p-10 bg-white shadow-sm">
       <div className="w-full max-w-md flex flex-col">
         <div className="mb-7 flex flex-col gap-3">
           <h2 className="text-3xl md:text-4xl tracking-tight font-medium text-neutral-700 font-serif ">
@@ -90,6 +91,7 @@ export const CreateWorkspaceView = () => {
             {createWorkspaceMutation.isPending ? "Creating..." : "Create Workspace"}
           </Button>
         </form>
+      </div>
       </div>
     </div>
   );
