@@ -13,7 +13,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useClerk } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 export function useSession() {
   return useQuery({
@@ -142,9 +142,20 @@ export const useLogout = () => {
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   const setUser = useUserStore((s) => s.setUser);
+  const { user: clerkUser } = useUser();
 
   return useMutation({
-    mutationFn: updateUser,
+    mutationFn: async (payload: { firstName: string; lastName: string; email?: string }) => {
+      // First update Clerk, as it's the source of truth
+      if (clerkUser) {
+        await clerkUser.update({
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+        });
+      }
+      // Then update our backend database
+      return updateUser(payload);
+    },
     onSuccess: (user) => {
       if (user) {
         setUser({ id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName });

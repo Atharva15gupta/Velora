@@ -105,6 +105,7 @@ export const PricingView = () => {
                   : "bg-emerald-800 text-white hover:bg-emerald-900"
                   }`}
                 type="button"
+                disabled={plan.cta === "Coming Soon"}
                 onClick={() => handleSubscribe(plan.name)}
               >
                 {plan.cta}

@@ -22,7 +22,7 @@ export const PRICING_PLANS = [
         price: "₹999",
         cadence: "/ month",
         blurb: "For scaling teams that need deeper insights.",
-        cta: "Upgrade to Pro",
+        cta: "Coming Soon",
         highlight: true,
         features: [
             "Up to 5 Workspaces",
