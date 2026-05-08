@@ -41,20 +41,20 @@ export const BillingTab = () => {
                                     <span
                                         className={cn(
                                             "text-xs font-semibold px-2 py-0.5 rounded-full border",
-                                            current.bg,
-                                            current.border,
-                                            current.color,
+                                            subscription?.status === "ACTIVE" 
+                                                ? cn(current.bg, current.border, current.color)
+                                                : "bg-neutral-100 border-neutral-200 text-neutral-500",
                                         )}
                                     >
-                                        Active
+                                        {subscription?.status === "ACTIVE" ? "Active" : subscription?.status === "CANCELLED" ? "Cancelled" : "Inactive"}
                                     </span>
                                 </div>
-                                <p className="text-sm text-neutral-600 font-medium">{current.price}</p>
+                                <p className="text-sm text-neutral-600 font-medium">{subscription ? current.price : "₹0/mo"}</p>
                                 <p className="text-xs text-neutral-500 tracking-tight">
                                     Workspace: {workspace?.name ?? "—"}
                                 </p>
                             </div>
-                            <ShieldCheck className={cn("size-8 mt-1 shrink-0", current.color)} />
+                            <ShieldCheck className={cn("size-8 mt-1 shrink-0", subscription?.status === "ACTIVE" ? current.color : "text-neutral-400")} />
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
