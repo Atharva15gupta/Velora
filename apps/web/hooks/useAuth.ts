@@ -152,8 +152,17 @@ export const useUpdateUser = () => {
           firstName: payload.firstName,
           lastName: payload.lastName,
         });
+        
+        // Return optimistic data since webhook will update the backend
+        return {
+          id: clerkUser.id,
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          email: payload.email || clerkUser.primaryEmailAddress?.emailAddress || "",
+        };
       }
-      // Then update our backend database
+      
+      // Fallback if Clerk isn't initialized (shouldn't happen)
       return updateUser(payload);
     },
     onSuccess: (user) => {

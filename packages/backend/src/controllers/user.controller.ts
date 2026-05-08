@@ -40,20 +40,30 @@ export const updateCurrentUser = async (req: Request, res: Response) => {
 
     const { firstName, lastName, email } = req.body;
 
-    // Use upsert in case the Clerk webhook hasn't synced the user yet
-    const user = await prisma.user.upsert({
+    // Use findFirst then update/create to avoid Prisma upsert race conditions
+    let user = await prisma.user.findUnique({
       where: { id: userId },
-      update: {
-        ...(firstName !== undefined && { firstName }),
-        ...(lastName !== undefined && { lastName }),
-      },
-      create: {
-        id: userId,
-        firstName: firstName || "",
-        lastName: lastName || "",
-        email: email || "",
-      },
     });
+
+    if (user) {
+      user = await prisma.user.update({
+        where: { id: userId },
+        data: {
+          ...(firstName !== undefined && { firstName }),
+          ...(lastName !== undefined && { lastName }),
+          ...(email !== undefined && { email }),
+        },
+      });
+    } else {
+      user = await prisma.user.create({
+        data: {
+          id: userId,
+          firstName: firstName || "",
+          lastName: lastName || "",
+          email: email || "",
+        },
+      });
+    }
 
     return res.status(200).json({
       message: "User profile updated successfully.",
