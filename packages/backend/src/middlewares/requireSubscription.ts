@@ -45,6 +45,7 @@ export const requireActiveSubscription = async (
     req.subscription = subscription;
     next();
   } catch (err) {
+    console.error("Subscription check error:", err);
     return res.status(500).json({ message: "Subscription check failed" });
   }
 };
