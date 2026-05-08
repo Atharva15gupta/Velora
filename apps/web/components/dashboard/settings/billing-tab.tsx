@@ -69,7 +69,7 @@ export const BillingTab = () => {
                 )}
             </Section>
 
-            {/* {!isPro && (
+            {!isPro && (
                 <div className="rounded-2xl p-2 bg-neutral-900">
                     <div className="rounded-xl border border-neutral-700 bg-neutral-900 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                         <div className="flex flex-col gap-1.5">
@@ -92,7 +92,7 @@ export const BillingTab = () => {
                         </Link>
                     </div>
                 </div>
-            )} */}
+            )}
 
             <Section title="Manage Subscription" description="Update your payment method or change your billing plan.">
                 <div className="flex flex-wrap gap-3">
