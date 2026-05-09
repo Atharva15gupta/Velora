@@ -13,10 +13,10 @@ export const createWorkspace = async (req: Request, res: Response) => {
 
     const { name, website } = req.body;
 
-    if (!name || !website) {
+    if (!name) {
       return res
         .status(400)
-        .json({ message: "Company name and Website are required" });
+        .json({ message: "Company name is required" });
     }
 
     const existingWorkspace = await prisma.workspace.findUnique({
