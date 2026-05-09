@@ -5,18 +5,23 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const QDRANT_URL = process.env.QDRANT_URL;
-const QDRANT_API_KEY = process.env.QDRANT_API_KEY;
-
 let clientPromise: Promise<QdrantClient> | null = null;
 
 export const getQdrantClient = async (): Promise<QdrantClient> => {
   if (!clientPromise) {
+    const url = process.env.QDRANT_URL;
+    const apiKey = process.env.QDRANT_API_KEY;
+    
+    if (!url) {
+      console.warn("QDRANT_URL is not set!");
+    }
+
     clientPromise = import("@qdrant/js-client-rest").then(
       ({ QdrantClient }) =>
         new QdrantClient({
-          url: QDRANT_URL,
-          apiKey: QDRANT_API_KEY,
+          url: url,
+          apiKey: apiKey,
+          port: url?.startsWith("https") ? 443 : 6333,
         }),
     );
   }
