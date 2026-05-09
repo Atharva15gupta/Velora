@@ -173,7 +173,11 @@ export const createWebResource = async (req: Request, res: Response) => {
         .json({ success: false, message: "Failed to access vector store" });
     }
 
-    await vectorStore.addDocuments(splitDocs);
+    try {
+      await vectorStore.addDocuments(splitDocs);
+    } catch (e: any) {
+      return res.status(500).json({ success: false, message: `Render Stack [VectorStore.addDocuments]: ${e.stack || String(e)}` });
+    }
 
     return res.json({
       success: true,

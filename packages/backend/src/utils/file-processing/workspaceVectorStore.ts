@@ -33,10 +33,15 @@ export const getWorkspaceVectorStore = async (workspaceId: string) => {
     console.error("Error checking/creating Qdrant collection:", error);
   }
 
-  const vectorStore = await QdrantVectorStore.fromExistingCollection(getEmbedding(), {
-    client,
-    collectionName: workspaceId,
-  });
+  let vectorStore;
+  try {
+    vectorStore = await QdrantVectorStore.fromExistingCollection(getEmbedding(), {
+      client,
+      collectionName: workspaceId,
+    });
+  } catch (e: any) {
+    throw new Error(`[QdrantVectorStore.fromExistingCollection]: ${e.stack || String(e)}`);
+  }
 
   storeCache.set(workspaceId, vectorStore);
   return vectorStore;
