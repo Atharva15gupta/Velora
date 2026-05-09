@@ -99,6 +99,25 @@ app.get("/api/v1/debug-env", (req, res) => {
     googleKeyLength: process.env.GOOGLE_API_KEY?.length || 0,
   });
 });
+app.get("/api/v1/test-fetch", async (req, res) => {
+  const results: any = {};
+  
+  try {
+    const qdrant = await fetch(process.env.QDRANT_URL as string);
+    results.qdrant = `Success: ${qdrant.status}`;
+  } catch (e: any) {
+    results.qdrant = `Error: ${e.message} - ${e.stack}`;
+  }
+
+  try {
+    const jina = await fetch("https://r.jina.ai/https://example.com");
+    results.jina = `Success: ${jina.status}`;
+  } catch (e: any) {
+    results.jina = `Error: ${e.message} - ${e.stack}`;
+  }
+
+  res.json(results);
+});
 app.use("/api/v1/auth", userRouter);
 app.use("/api/v1/workspace", workspaceRouter);
 app.use("/api/v1/workspace", resourceRouter);
