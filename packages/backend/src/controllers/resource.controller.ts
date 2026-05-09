@@ -180,8 +180,9 @@ export const createWebResource = async (req: Request, res: Response) => {
       message: "Web resource created successfully",
       pagesIndexed: crawled.length,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("createWebResource failed", error);
+    fs.writeFileSync(".last_error.log", error?.stack || String(error));
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });
