@@ -2,13 +2,14 @@
 
 import { useWorkspace, useCreateWorkspace } from "@/hooks/useWorkspace";
 import { useWorkspaceStore } from "@/store/useWorkspaceStore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const WorkspaceSessionSync = () => {
   const setWorkspace = useWorkspaceStore((state) => state.setWorkspace);
   const clearWorkspace = useWorkspaceStore((state) => state.clearWorkspace);
-  const { data: workspace, isSuccess, isError } = useWorkspace();
+  const { data: workspace, isSuccess, isError, error } = useWorkspace();
   const createWorkspaceMutation = useCreateWorkspace();
+  const hasAttemptedCreation = useRef(false);
 
   useEffect(() => {
     if (isSuccess && workspace) {
@@ -23,11 +24,15 @@ export const WorkspaceSessionSync = () => {
   useEffect(() => {
     if (isError) {
       clearWorkspace();
-      if (!createWorkspaceMutation.isPending && !createWorkspaceMutation.isSuccess) {
+      const errorMessage = error?.message?.toLowerCase() || "";
+      const isNotFound = errorMessage.includes("404") || errorMessage.includes("no workspace");
+      
+      if (isNotFound && !hasAttemptedCreation.current && !createWorkspaceMutation.isPending && !createWorkspaceMutation.isSuccess) {
+        hasAttemptedCreation.current = true;
         createWorkspaceMutation.mutate({ name: "My Workspace", website: "" });
       }
     }
-  }, [clearWorkspace, isError, createWorkspaceMutation.isPending, createWorkspaceMutation.isSuccess, createWorkspaceMutation.mutate]);
+  }, [clearWorkspace, isError, error, createWorkspaceMutation.isPending, createWorkspaceMutation.isSuccess, createWorkspaceMutation.mutate]);
 
   return null;
 };

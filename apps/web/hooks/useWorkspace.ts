@@ -6,12 +6,16 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { useAuth } from "@clerk/nextjs";
+
 export const useWorkspace = () => {
+  const { isLoaded, isSignedIn } = useAuth();
   return useQuery({
     queryKey: ["workspace"],
     queryFn: fetchWorkspace,
     retry: false,
     gcTime: 5 * 60 * 1000,
+    enabled: isLoaded && isSignedIn,
   });
 };
 
