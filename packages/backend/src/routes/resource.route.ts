@@ -24,8 +24,7 @@ const upload = multer({ storage });
 router.use(
   "/:workspaceId/resources",
   verifyAuth,
-  requireWorkspaceAccess,
-  requireActiveSubscription
+  requireWorkspaceAccess
 );
 
 // File Resource Routes

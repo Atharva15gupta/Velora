@@ -5,8 +5,8 @@ import { requireActiveSubscription } from "../middlewares/requireSubscription";
 
 const router: Router = Router();
 
-router.post("/create", verifyAuth, requireActiveSubscription, createWorkspace);
-router.get("/get", verifyAuth, requireActiveSubscription, getWorkspace);
-router.patch("/update", verifyAuth, requireActiveSubscription, updateWorkspace);
+router.post("/create", verifyAuth, createWorkspace);
+router.get("/get", verifyAuth, getWorkspace);
+router.patch("/update", verifyAuth, updateWorkspace);
 
 export default router;
