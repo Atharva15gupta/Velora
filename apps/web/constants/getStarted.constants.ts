@@ -53,8 +53,8 @@ export const steps: Step[] = [
       "Escalate to human support if needed",
       "Store and organize all conversations in your inbox",
     ],
-    requiredRoutes: ["/dashboard/conversations"],
-    actions: [{ label: "Open Inbox", href: "/dashboard/conversations" }],
+    requiredRoutes: ["/dashboard/inbox"],
+    actions: [{ label: "Open Inbox", href: "/dashboard/inbox" }],
   },
   {
     id: "analytics",

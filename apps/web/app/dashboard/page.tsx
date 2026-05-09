@@ -5,11 +5,10 @@ export const metadata: Metadata = {
   description: "View your AI agent's performance and conversations.",
 };
 
-// We will implement DashboardView in the next step
-import { DashboardView } from "@/views/dashboard/dashboard-view";
+import { GetStartedView } from "@/views/dashboard/get-started-view";
 
 const DashboardPage = () => {
-  return <DashboardView />;
+  return <GetStartedView />;
 };
 
 export default DashboardPage;

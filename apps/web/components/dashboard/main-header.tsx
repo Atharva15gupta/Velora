@@ -65,7 +65,7 @@ export const MainHeader = () => {
       });
     }
 
-    router.push(`/inbox/${conversationId}`);
+    router.push(`/dashboard/inbox/${conversationId}`);
   };
 
   const getCustomerLabel = (customer: {

@@ -15,13 +15,13 @@ import {
 export const SIDEBAR_ITEMS = {
   primary: [
     {
-      title: "Dashboard",
+      title: "Get Started",
       url: "/dashboard",
       icon: RocketIcon,
     },
     {
-      title: "Conversations",
-      url: "/dashboard/conversations",
+      title: "Inbox",
+      url: "/dashboard/inbox",
       icon: InboxIcon,
     },
   ],
@@ -46,7 +46,7 @@ export const SIDEBAR_ITEMS = {
   ],
   configuration: [
     {
-      title: "AI Agent",
+      title: "Widget Customization",
       url: "/dashboard/agent",
       icon: Sparkles2Icon,
     },
