@@ -92,6 +92,13 @@ app.get("/", async (_req, res) => {
 });
 
 // Routes
+app.get("/api/v1/debug-env", (req, res) => {
+  res.json({
+    qdrantUrlLength: process.env.QDRANT_URL?.length || 0,
+    qdrantKeyLength: process.env.QDRANT_API_KEY?.length || 0,
+    googleKeyLength: process.env.GOOGLE_API_KEY?.length || 0,
+  });
+});
 app.use("/api/v1/auth", userRouter);
 app.use("/api/v1/workspace", workspaceRouter);
 app.use("/api/v1/workspace", resourceRouter);
