@@ -32,10 +32,13 @@ export const useCreateWorkspace = () => {
       router.push("/onboarding");
     },
     onError: (error) => {
-      toast.error(
-        `Workspace creation error: ${error instanceof Error ? error.message : String(error)
-        }`,
-      );
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (errorMessage.toLowerCase().includes("already have a workspace")) {
+        queryClient.invalidateQueries({ queryKey: ["workspace"] });
+        router.push("/dashboard");
+      } else {
+        toast.error(`Workspace creation error: ${errorMessage}`);
+      }
     },
   });
 };
