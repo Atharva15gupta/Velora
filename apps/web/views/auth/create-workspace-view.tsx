@@ -6,11 +6,15 @@ import { Button } from "@workspace/ui/components/button";
 import { Input } from "@workspace/ui/components/input";
 import { Controller, useForm } from "react-hook-form";
 import { createWorkspaceSchema } from "@/schemas/createWorkspaceSchema";
-import { useCreateWorkspace } from "@/hooks/useWorkspace";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useCreateWorkspace, useWorkspace } from "@/hooks/useWorkspace";
 import z from "zod";
 
 export const CreateWorkspaceView = () => {
+  const router = useRouter();
   const createWorkspaceMutation = useCreateWorkspace();
+  const { data: existingWorkspace, isSuccess } = useWorkspace();
   const form = useForm({
     resolver: zodResolver(createWorkspaceSchema),
     defaultValues: {
@@ -18,6 +22,12 @@ export const CreateWorkspaceView = () => {
       website: "",
     },
   });
+
+  useEffect(() => {
+    if (isSuccess && existingWorkspace) {
+      router.push("/get-started");
+    }
+  }, [isSuccess, existingWorkspace, router]);
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-amber-50 p-4">
