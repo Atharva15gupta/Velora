@@ -24,7 +24,7 @@ export default clerkMiddleware(async (auth, req) => {
 
   // If user is signed in and visiting auth pages or landing page, redirect to dashboard
   if (userId && (isAuthRoute(req) || isLandingPage(req))) {
-    return NextResponse.redirect(new URL("/inbox", req.url));
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
   // If user is NOT signed in and visiting a protected route, redirect to sign-in

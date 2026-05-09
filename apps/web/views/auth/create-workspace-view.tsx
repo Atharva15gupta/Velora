@@ -25,7 +25,7 @@ export const CreateWorkspaceView = () => {
 
   useEffect(() => {
     if (isSuccess && existingWorkspace) {
-      router.push("/inbox");
+      router.push("/dashboard");
     }
   }, [isSuccess, existingWorkspace, router]);
 
