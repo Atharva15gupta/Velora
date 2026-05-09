@@ -29,7 +29,7 @@ export const useCreateWorkspace = () => {
         website: workspace.website,
       });
       queryClient.setQueryData(["workspace"], workspace);
-      router.push("/onboarding");
+      router.push("/dashboard");
     },
     onError: (error) => {
       const errorMessage = error instanceof Error ? error.message : String(error);

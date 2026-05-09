@@ -17,7 +17,7 @@ export const SuccessPageView = () => {
         setIsSyncing(false);
 
         setTimeout(() => {
-          router.replace("/create-workspace");
+          router.replace("/dashboard");
         }, 2000);
       } catch (err) {
         console.error("Failed to sync session", err);
@@ -67,11 +67,11 @@ export const SuccessPageView = () => {
               </p>
 
               <Button
-                onClick={() => router.replace("/create-workspace")}
+                onClick={() => router.replace("/dashboard")}
                 disabled={isSyncing}
                 className="w-full group"
               >
-                Continue to Setup
+                Continue to Dashboard
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>

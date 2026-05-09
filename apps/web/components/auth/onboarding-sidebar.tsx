@@ -63,7 +63,7 @@ export const OnboardingSidebar = () => {
                 </h3>
               </div>
             )}
-          {isCreateWorkspace ? (
+          {pathname === "/dashboard" ? (
             <div
               key="3"
               className="flex flex-col w-full p-4 gap-3 bg-neutral-100 backdrop-blur-xl rounded-xl ring ring-white/10"
@@ -72,7 +72,7 @@ export const OnboardingSidebar = () => {
                 3
               </div>
               <h3 className="text-neutral-600 text-sm">
-                Configure your workspace details
+                Launch your dashboard
               </h3>
             </div>
           ) : (
@@ -81,7 +81,7 @@ export const OnboardingSidebar = () => {
                 3
               </div>
               <h3 className="text-sm text-white/80 tracking-tight">
-                Configure your workspace details
+                Launch your dashboard
               </h3>
             </div>
           )}

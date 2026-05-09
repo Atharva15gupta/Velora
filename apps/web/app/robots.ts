@@ -10,7 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
         '/dashboard/', 
         '/billing/', 
-        '/create-workspace', 
         '/payment',
         '/inbox/',
         '/settings/'
