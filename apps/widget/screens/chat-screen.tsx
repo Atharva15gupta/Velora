@@ -202,7 +202,7 @@ export const ChatScreen = () => {
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      setCurrentScreen("error");
+      pushMessage("assistant", "Sorry, I ran into an issue. Please try again in a moment.");
     }
   };
 
