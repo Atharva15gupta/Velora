@@ -12,10 +12,10 @@ export const steps: Step[] = [
       "Upload FAQs, help guides, PDFs, and internal docs",
       "Keep your knowledge base updated anytime",
     ],
-    requiredRoutes: ["/web-content", "/data-importer"],
+    requiredRoutes: ["/dashboard/knowledge-base/web-content", "/dashboard/knowledge-base/data-importer"],
     actions: [
-      { label: "Add Website URL", href: "/web-content" },
-      { label: "Upload Documents", href: "/data-importer" },
+      { label: "Add Website URL", href: "/dashboard/knowledge-base/web-content" },
+      { label: "Upload Documents", href: "/dashboard/knowledge-base/data-importer" },
     ],
   },
   {
@@ -28,8 +28,8 @@ export const steps: Step[] = [
       "Match colors and tone to your product",
       "Configure identity collection preferences",
     ],
-    requiredRoutes: ["/widget-customization"],
-    actions: [{ label: "Customize Widget", href: "/widget-customization" }],
+    requiredRoutes: ["/dashboard/agent"],
+    actions: [{ label: "Customize Widget", href: "/dashboard/agent" }],
   },
   {
     id: "install-velora",
@@ -40,8 +40,8 @@ export const steps: Step[] = [
       "Paste it into your website's <head>",
       "Deploy",
     ],
-    requiredRoutes: ["/integrations"],
-    actions: [{ label: "View Install Steps", href: "/integrations" }],
+    requiredRoutes: ["/dashboard/integrations"],
+    actions: [{ label: "View Install Steps", href: "/dashboard/integrations" }],
   },
   {
     id: "conversations",
@@ -53,8 +53,8 @@ export const steps: Step[] = [
       "Escalate to human support if needed",
       "Store and organize all conversations in your inbox",
     ],
-    requiredRoutes: ["/inbox"],
-    actions: [{ label: "Open Inbox", href: "/inbox" }],
+    requiredRoutes: ["/dashboard/conversations"],
+    actions: [{ label: "Open Inbox", href: "/dashboard/conversations" }],
   },
   {
     id: "analytics",
@@ -64,9 +64,9 @@ export const steps: Step[] = [
       "Monitor unresolved, escalated, and resolved statuses",
       "Track engagement and optimize your knowledge base over time",
     ],
-    requiredRoutes: ["/analytics"],
+    requiredRoutes: ["/dashboard/analytics"],
     actions: [
-      { label: "Open Analytics", href: "/analytics" },
+      { label: "Open Analytics", href: "/dashboard/analytics" },
     ],
   },
   // {
