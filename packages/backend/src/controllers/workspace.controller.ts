@@ -29,18 +29,12 @@ export const createWorkspace = async (req: Request, res: Response) => {
 
     const subscription = await getActiveSubscription(userId);
 
-    if (!subscription) {
-      return res.status(403).json({
-        message: "Please choose a plan to create a workspace",
-      });
-    }
-
     const newWorkspace = await prisma.workspace.create({
       data: {
         name,
         website,
         userId: userId,
-        plan: subscription.plan,
+        plan: subscription ? subscription.plan : "STARTER",
       },
     });
 
