@@ -6,27 +6,32 @@ import { escalateConversation } from "../services/notification.service";
 
 export const vectorSearchTool = tool(
   async ({ query, workspaceId }: { query: string; workspaceId: string }) => {
-    const vectorStore = await getWorkspaceVectorStore(workspaceId);
-    if (!vectorStore) {
-      return "Vector store not found for the specified workspace.";
+    try {
+      const vectorStore = await getWorkspaceVectorStore(workspaceId);
+      if (!vectorStore) {
+        return "Vector store not found for the specified workspace.";
+      }
+
+      const activeResources = await prisma.resource.findMany({
+        where: { workspaceId, active: true },
+        select: { id: true },
+      });
+
+      const activeIds = new Set(activeResources.map((resource) => resource.id));
+
+      const results = await vectorStore.similaritySearch(query, 6);
+
+      const filtered = results.filter(
+        d => d.metadata?.resourceId && activeIds.has(d.metadata.resourceId)
+      );
+
+      return filtered
+        .map((doc, idx) => `Result ${idx + 1}:\n${doc.pageContent}`)
+        .join("\n\n");
+    } catch (e: any) {
+      console.error("vectorSearchTool error:", e?.message ?? String(e));
+      return "I could not search the knowledge base right now. Please answer based on general knowledge.";
     }
-
-    const activeResources = await prisma.resource.findMany({
-      where: { workspaceId, active: true },
-      select: { id: true },
-    });
-
-    const activeIds = new Set(activeResources.map((resource) => resource.id));
-
-    const results = await vectorStore.similaritySearch(query, 6);
-
-    const filtered = results.filter(
-      d => d.metadata?.resourceId && activeIds.has(d.metadata.resourceId)
-    );
-
-    return filtered
-      .map((doc, idx) => `Result ${idx + 1}:\n${doc.pageContent}`)
-      .join("\n\n");
   },
   {
     name: "vector_search",
