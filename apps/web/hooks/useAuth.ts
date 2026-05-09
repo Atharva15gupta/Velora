@@ -42,7 +42,7 @@ export const useSignupUser = () => {
         lastName: user.lastName,
       });
       queryClient.setQueryData(["user"], user);
-      router.push("/inbox");
+      router.push("/onboarding");
     },
     onError: (error) => {
       toast.error(
@@ -70,7 +70,7 @@ export const useLogin = () => {
         lastName: user.lastName,
       });
       queryClient.setQueryData(["user"], user);
-      router.push("/inbox");
+      router.push("/dashboard");
     },
     onError: (error) => {
       toast.error(
@@ -98,7 +98,7 @@ export const useGoogleLoginMutation = () => {
         lastName: user.lastName,
       });
       queryClient.setQueryData(["user"], user);
-      router.push("/inbox");
+      router.push("/dashboard"); // Or onboarding if new user, but google login doesn't differentiate here unless backend tells us. For now, redirect to dashboard, dashboard will check onboarding status.
     },
     onError: (error) => {
       toast.error(
