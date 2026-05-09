@@ -116,6 +116,8 @@ app.get("/api/v1/test-fetch", async (req, res) => {
     results.jina = `Error: ${e.message} - ${e.stack}`;
   }
 
+  results.nodeOptions = process.env.NODE_OPTIONS || "NOT SET";
+  
   res.json(results);
 });
 app.use("/api/v1/auth", userRouter);

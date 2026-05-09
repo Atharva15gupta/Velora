@@ -21,7 +21,6 @@ export const getQdrantClient = async (): Promise<QdrantClient> => {
         new QdrantClient({
           url: url,
           apiKey: apiKey,
-          port: url?.startsWith("https") ? 443 : 6333,
         }),
     );
   }
