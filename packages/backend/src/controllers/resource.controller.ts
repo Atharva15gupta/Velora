@@ -253,18 +253,25 @@ export const deleteResource = async (req: Request, res: Response) => {
     }
 
     const client = await getQdrantClient();
-    await client.delete(resource.workspaceId, {
-      filter: {
-        must: [
-          {
-            key: "metadata.resourceId",
-            match: {
-              value: resourceId,
+    try {
+      await client.delete(resource.workspaceId, {
+        filter: {
+          must: [
+            {
+              key: "metadata.resourceId",
+              match: {
+                value: resourceId,
+              },
             },
-          },
-        ],
-      },
-    });
+          ],
+        },
+      });
+    } catch (qdrantError: any) {
+      // If collection doesn't exist (404), it's fine, we still want to delete from Postgres
+      if (qdrantError?.status !== 404) {
+        console.error("Qdrant delete error (non-fatal):", qdrantError);
+      }
+    }
 
     await prisma.resource.delete({
       where: { id: resourceId },
@@ -344,18 +351,24 @@ export const recrawlWebResource = async (req: Request, res: Response) => {
     }
 
     const client = await getQdrantClient();
-    await client.delete(resource.workspaceId, {
-      filter: {
-        must: [
-          {
-            key: "metadata.resourceId",
-            match: {
-              value: resourceId,
+    try {
+      await client.delete(resource.workspaceId, {
+        filter: {
+          must: [
+            {
+              key: "metadata.resourceId",
+              match: {
+                value: resourceId,
+              },
             },
-          },
-        ],
-      },
-    });
+          ],
+        },
+      });
+    } catch (qdrantError: any) {
+      if (qdrantError?.status !== 404) {
+        console.error("Qdrant delete error during recrawl (non-fatal):", qdrantError);
+      }
+    }
 
     await vectorStore.addDocuments(splitDocs);
 
