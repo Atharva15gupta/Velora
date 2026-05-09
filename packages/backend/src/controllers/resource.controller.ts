@@ -185,7 +185,7 @@ export const createWebResource = async (req: Request, res: Response) => {
     fs.writeFileSync(".last_error.log", error?.stack || String(error));
     return res
       .status(500)
-      .json({ success: false, message: `Render Error: ${error instanceof Error ? error.message : String(error)}` });
+      .json({ success: false, message: `Render Stack: ${error instanceof Error ? error.stack : String(error)}` });
   }
 };
 
