@@ -116,6 +116,25 @@ app.get("/api/v1/test-fetch", async (req, res) => {
     results.jina = `Error: ${e.message} - ${e.stack}`;
   }
 
+  try {
+    const googleKey = process.env.GOOGLE_API_KEY;
+    const googleRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models?key=${googleKey}`
+    );
+    results.googleAPI = `Success: ${googleRes.status}`;
+  } catch (e: any) {
+    results.googleAPI = `Error: ${e.message}`;
+  }
+
+  try {
+    const { ChatGoogleGenerativeAI } = await import("@langchain/google-genai");
+    const llm = new ChatGoogleGenerativeAI({ model: "gemini-2.5-flash-lite", temperature: 0 });
+    const resp = await llm.invoke("Say hello in one word");
+    results.geminiLLM = `Success: ${typeof resp.content === "string" ? resp.content.slice(0, 30) : "ok"}`;
+  } catch (e: any) {
+    results.geminiLLM = `Error: ${e.message}`;
+  }
+
   results.nodeOptions = process.env.NODE_OPTIONS || "NOT SET";
   
   res.json(results);
