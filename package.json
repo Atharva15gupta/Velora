@@ -7,7 +7,7 @@
     "dev": "turbo dev",
     "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml watch",
     "docker:prod": "docker compose up",
-    "build:backend": "cd packages/backend && pnpm build",
+    "build:backend": "pnpm --filter @workspace/db build && pnpm --filter @workspace/backend build",
     "start:backend": "cd packages/backend && pnpm start",
     "db:generate": "cd packages/db && pnpm exec prisma generate",
     "build:web": "cd apps/web && pnpm build",
