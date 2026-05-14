@@ -7,14 +7,11 @@ export const getSubscriptionDetails = async () => {
 
 export const createCheckoutSession = async ({
   plan,
-  userId,
 }: {
   plan: "STARTER" | "PRO";
-  userId: string;
 }) => {
   const response = await axiosInstance.post("/subscription/billing/create-checkout", {
     plan,
-    userId,
   });
-  return response.data as { checkoutUrl?: string };
+  return response.data as { subscriptionId: string };
 };

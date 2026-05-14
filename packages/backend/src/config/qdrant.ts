@@ -1,22 +1,24 @@
-import { QdrantClient } from "@qdrant/js-client-rest";
 import dotenv from "dotenv";
+
+type QdrantClientType = any;
 
 dotenv.config();
 
-let client: QdrantClient | null = null;
+let client: QdrantClientType | null = null;
 
-export const getQdrantClient = async (): Promise<QdrantClient> => {
+export const getQdrantClient = async (): Promise<QdrantClientType> => {
   if (!client) {
+    const { QdrantClient } = await import("@qdrant/js-client-rest");
     const url = process.env.QDRANT_URL;
     const apiKey = process.env.QDRANT_API_KEY;
 
     if (!url) {
-      console.warn("QDRANT_URL is not set!");
+      throw new Error("QDRANT_URL is not set");
     }
 
     client = new QdrantClient({
-      url: url,
-      apiKey: apiKey,
+      url,
+      apiKey,
     });
   }
 

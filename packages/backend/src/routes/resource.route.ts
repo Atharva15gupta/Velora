@@ -11,12 +11,16 @@ import {
 import { requireWorkspaceAccess } from "../middlewares/requireWorkspace";
 import { requireActiveSubscription } from "../middlewares/requireSubscription";
 import { verifyAuth } from "../middlewares/auth.middleware";
+import fs from "fs";
 
 const router: Router = Router();
+const uploadDir = "uploads";
+
+fs.mkdirSync(uploadDir, { recursive: true });
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+  destination: (_req, _file, cb) => cb(null, uploadDir),
+  filename: (_req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 
 const upload = multer({ storage });
@@ -28,11 +32,11 @@ router.use(
 );
 
 // File Resource Routes
-router.post("/:workspaceId/resources/file", upload.single("file"), createFileResource);
+router.post("/:workspaceId/resources/file", requireActiveSubscription, upload.single("file"), createFileResource);
 
 // Web Resource Routes
-router.post("/:workspaceId/resources/web", createWebResource);
-router.post("/:workspaceId/resources/:resourceId/recrawl", recrawlWebResource);
+router.post("/:workspaceId/resources/web", requireActiveSubscription, createWebResource);
+router.post("/:workspaceId/resources/:resourceId/recrawl", requireActiveSubscription, recrawlWebResource);
 
 // Other Resource Routes
 router.get("/:workspaceId/resources", getAllResources);

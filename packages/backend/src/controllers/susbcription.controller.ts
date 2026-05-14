@@ -4,7 +4,12 @@ import Razorpay from "razorpay";
 
 export const createCheckoutSession = async (req: Request, res: Response) => {
   try {
-    const { plan, userId } = req.body;
+    const { plan } = req.body;
+    const userId = req.userId;
+
+    if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
 
     const planId =
       plan === "STARTER"

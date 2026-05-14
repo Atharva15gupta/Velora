@@ -92,53 +92,6 @@ app.get("/", async (_req, res) => {
 });
 
 // Routes
-app.get("/api/v1/debug-env", (req, res) => {
-  res.json({
-    qdrantUrlLength: process.env.QDRANT_URL?.length || 0,
-    qdrantKeyLength: process.env.QDRANT_API_KEY?.length || 0,
-    googleKeyLength: process.env.GOOGLE_API_KEY?.length || 0,
-  });
-});
-app.get("/api/v1/test-fetch", async (req, res) => {
-  const results: any = {};
-  
-  try {
-    const qdrant = await fetch(process.env.QDRANT_URL as string);
-    results.qdrant = `Success: ${qdrant.status}`;
-  } catch (e: any) {
-    results.qdrant = `Error: ${e.message} - ${e.stack}`;
-  }
-
-  try {
-    const jina = await fetch("https://r.jina.ai/https://example.com");
-    results.jina = `Success: ${jina.status}`;
-  } catch (e: any) {
-    results.jina = `Error: ${e.message} - ${e.stack}`;
-  }
-
-  try {
-    const googleKey = process.env.GOOGLE_API_KEY;
-    const googleRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models?key=${googleKey}`
-    );
-    results.googleAPI = `Success: ${googleRes.status}`;
-  } catch (e: any) {
-    results.googleAPI = `Error: ${e.message}`;
-  }
-
-  try {
-    const { ChatGoogleGenerativeAI } = await import("@langchain/google-genai");
-    const llm = new ChatGoogleGenerativeAI({ model: "gemini-2.5-flash-lite", temperature: 0 });
-    const resp = await llm.invoke("Say hello in one word");
-    results.geminiLLM = `Success: ${typeof resp.content === "string" ? resp.content.slice(0, 30) : "ok"}`;
-  } catch (e: any) {
-    results.geminiLLM = `Error: ${e.message}`;
-  }
-
-  results.nodeOptions = process.env.NODE_OPTIONS || "NOT SET";
-  
-  res.json(results);
-});
 app.use("/api/v1/auth", userRouter);
 app.use("/api/v1/workspace", workspaceRouter);
 app.use("/api/v1/workspace", resourceRouter);

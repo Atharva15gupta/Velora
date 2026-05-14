@@ -23,7 +23,9 @@ export const getWorkspaceVectorStore = async (workspaceId: string) => {
   // Check if collection exists
   try {
     const collections = await client.getCollections();
-    const exists = collections.collections.some(c => c.name === workspaceId);
+    const exists = collections.collections.some(
+      (collection: { name: string }) => collection.name === workspaceId,
+    );
     
     if (!exists) {
       console.log(`Collection ${workspaceId} not found. Creating it now...`);

@@ -2,31 +2,54 @@
 
 import { PLAN_COMPARISONS, PRICING_PLANS } from "@/constants/pricing.constants";
 import { useCreateCheckout, useSubscription } from "@/hooks/useSubscription";
-import { useUserStore } from "@/store/useUserStore";
+import { useUser } from "@clerk/nextjs";
 import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { useRazorpay } from "react-razorpay";
 import { toast } from "sonner";
 
 export const PaymentView = () => {
   const createCheckoutMutation = useCreateCheckout();
   const { data: subscription } = useSubscription();
-  const userId = useUserStore((state) => state.user?.id);
+  const { user } = useUser();
+  const { Razorpay } = useRazorpay();
+  const router = useRouter();
 
   const handleCheckout = async (planName: "Starter" | "Pro") => {
-    if (!userId) {
+    if (!user) {
       toast.error("Unable to start checkout. Please login again.");
       return;
     }
 
     const plan = planName === "Starter" ? "STARTER" : "PRO";
-    const data = await createCheckoutMutation.mutateAsync({ plan, userId });
+    const data = await createCheckoutMutation.mutateAsync({ plan });
 
-    if (!data?.checkoutUrl) {
-      toast.error("Checkout link was not returned. Please try again.");
+    if (!data?.subscriptionId) {
+      toast.error("Subscription was not created. Please try again.");
       return;
     }
 
-    window.location.href = data.checkoutUrl;
+    const options: any = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+      subscription_id: data.subscriptionId,
+      name: "Velora AI",
+      description: `${planName} Plan Subscription`,
+      handler: () => {
+        toast.success("Payment successful!");
+        router.push("/dashboard");
+      },
+      prefill: {
+        name: user.fullName || "",
+        email: user.primaryEmailAddress?.emailAddress || "",
+      },
+      theme: {
+        color: "#047857",
+      },
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
   };
 
   return (

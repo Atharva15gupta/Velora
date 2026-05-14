@@ -1,6 +1,10 @@
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import dotenv from "dotenv";
-import { vectorSearchTool } from "../ai/tools";
+import {
+  escalateConversationTool,
+  resolveConversationTool,
+  vectorSearchTool,
+} from "../ai/tools";
 
 dotenv.config();
 
@@ -17,7 +21,11 @@ export function getModel() {
       temperature: 0,
     });
 
-    modelInstance = llm.bindTools([vectorSearchTool]);
+    modelInstance = llm.bindTools([
+      vectorSearchTool,
+      escalateConversationTool,
+      resolveConversationTool,
+    ]);
   }
 
   return modelInstance;

@@ -9,6 +9,11 @@ import { getQdrantClient } from "../config/qdrant";
 import { crawlWebsitePages } from "../utils/resources/crawlPage";
 import { PLAN_FEATURES } from "../constants/plans";
 
+const removeUploadedFile = async (path?: string) => {
+  if (!path) return;
+  await fs.promises.unlink(path).catch(() => undefined);
+};
+
 export const createFileResource = async (req: Request, res: Response) => {
   try {
     const workspace = req.workspace!;
@@ -89,7 +94,8 @@ export const createFileResource = async (req: Request, res: Response) => {
 
     return res.json({ success: true, resource });
   } catch (error) {
-    await fs.promises.unlink(req.file!.path);
+    console.error("createFileResource failed", error);
+    await removeUploadedFile(req.file?.path);
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });
@@ -182,14 +188,14 @@ export const createWebResource = async (req: Request, res: Response) => {
     return res.json({
       success: true,
       message: "Web resource created successfully",
+      resource,
       pagesIndexed: crawled.length,
     });
   } catch (error: any) {
     console.error("createWebResource failed", error);
-    fs.writeFileSync(".last_error.log", error?.stack || String(error));
     return res
       .status(500)
-      .json({ success: false, message: `Render Stack: ${error instanceof Error ? error.stack : String(error)}` });
+      .json({ success: false, message: "Internal server error" });
   }
 };
 

@@ -5,8 +5,18 @@ import { prisma } from "@workspace/db";
 import { escalateConversation } from "../services/notification.service";
 
 export const vectorSearchTool = tool(
-  async ({ query, workspaceId }: { query: string; workspaceId: string }) => {
+  async ({
+    query,
+    workspaceId,
+  }: {
+    query: string;
+    workspaceId?: string;
+  }) => {
     try {
+      if (!workspaceId) {
+        return "Workspace context is missing, so the knowledge base cannot be searched right now.";
+      }
+
       const vectorStore = await getWorkspaceVectorStore(workspaceId);
       if (!vectorStore) {
         return "Vector store not found for the specified workspace.";
@@ -34,11 +44,10 @@ export const vectorSearchTool = tool(
     }
   },
   {
-    name: "vector_search",
+    name: "search_tool",
     description: "Search company knowledge base for relevant information",
     schema: z.object({
       query: z.string().describe("Search query text"),
-      workspaceId: z.string().describe("Workspace identifier"),
     }),
   }
 );
@@ -48,9 +57,13 @@ export const escalateConversationTool = tool(
     conversationId,
     workspaceId,
   }: {
-    conversationId: string;
-    workspaceId: string;
+    conversationId?: string;
+    workspaceId?: string;
   }) => {
+    if (!workspaceId || !conversationId) {
+      return "Conversation context is missing, so this chat could not be escalated.";
+    }
+
     await escalateConversation(workspaceId, conversationId);
 
     return "Conversation has been escalated to a human agent.";
@@ -59,15 +72,16 @@ export const escalateConversationTool = tool(
     name: "escalate_conversation",
     description:
       "Escalate the conversation to a human agent when the user asks for human help or is unhappy.",
-    schema: z.object({
-      conversationId: z.string(),
-      workspaceId: z.string(),
-    }),
+    schema: z.object({}),
   }
 );
 
 export const resolveConversationTool = tool(
-  async ({ conversationId }: { conversationId: string }) => {
+  async ({ conversationId }: { conversationId?: string }) => {
+    if (!conversationId) {
+      return "Conversation context is missing, so this chat could not be resolved.";
+    }
+
     await prisma.conversation.update({
       where: { id: conversationId },
       data: { status: "resolved" },
@@ -79,14 +93,12 @@ export const resolveConversationTool = tool(
     name: "resolve_conversation",
     description:
       "Mark the conversation as resolved when the user confirms their issue is solved.",
-    schema: z.object({
-      conversationId: z.string(),
-    }),
+    schema: z.object({}),
   }
 );
 
 export const toolsByName = {
-  vector_search: vectorSearchTool,
+  search_tool: vectorSearchTool,
   escalate_conversation: escalateConversationTool,
   resolve_conversation: resolveConversationTool,
 };
