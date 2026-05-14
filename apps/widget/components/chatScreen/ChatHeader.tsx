@@ -29,7 +29,7 @@ export const ChatHeader = ({
             />
           ) : (
             <Image
-              src="/velora-ai.png"
+              src="/velora-logo.svg"
               alt="avatar"
               width={40}
               height={40}

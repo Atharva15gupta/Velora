@@ -1,4 +1,4 @@
-# <img src="apps/web/public/velora.png" alt="Velora Logo" width="45" align="top" /> Velora
+# <img src="apps/web/public/velora-logo.svg" alt="Velora Logo" width="45" align="top" /> Velora
 
 > AI Agent that actually understands your business
 

@@ -33,7 +33,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://velora-web-blond.ve
 export const metadata = {
   metadataBase: new URL(BASE_URL),
   icons: {
-    icon: "/velora.png",
+    icon: "/velora-logo.svg",
   },
   openGraph: {
     title: "Velora - AI Agent for Customer Support",
