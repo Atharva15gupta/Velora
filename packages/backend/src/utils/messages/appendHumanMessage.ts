@@ -22,7 +22,8 @@ export const appendHumanMessage = async ({
     },
   };
 
-  await chatbot.invoke(
+  await chatbot.updateState(
+    config,
     {
       messages: [
         new AIMessage({
@@ -34,6 +35,6 @@ export const appendHumanMessage = async ({
         }),
       ],
     },
-    config,
+    "llmCall",
   );
 };

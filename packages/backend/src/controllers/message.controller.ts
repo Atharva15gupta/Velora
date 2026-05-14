@@ -259,15 +259,26 @@ export const getAllMessages = async (req: Request, res: Response) => {
 
 export const sendHumanReply = async (req: Request, res: Response) => {
   try {
+    const workspace = req.workspace!;
     const { conversationId } = req.params;
     const { message } = req.body;
+
+    if (!conversationId) {
+      return res.status(400).json({ message: "Conversation ID is required" });
+    }
+
+    if (!message || typeof message !== "string" || !message.trim()) {
+      return res.status(400).json({ message: "Message content is required" });
+    }
 
     const conversation = await prisma.conversation.findUnique({
       where: { id: conversationId },
     });
 
-    if (!conversation) {
-      return res.status(404).json({ message: "Conversation not found" });
+    if (!conversation || conversation.workspaceId !== workspace.id) {
+      return res
+        .status(404)
+        .json({ message: "Conversation not found in this workspace" });
     }
 
     await appendHumanMessage({
@@ -276,7 +287,7 @@ export const sendHumanReply = async (req: Request, res: Response) => {
         workspaceId: conversation.workspaceId,
         conversationId: conversation.id,
       },
-      content: message,
+      content: message.trim(),
     });
 
     return res.json({
