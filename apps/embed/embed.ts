@@ -1,5 +1,5 @@
 import { EMBED_CONFIG } from './config';
-import { chatBubbleIcon, closeIcon } from './icons';
+import { closeIcon, getLogoIcon } from './icons';
 
 (function() {
   let iframe: HTMLIFrameElement | null = null;
@@ -10,12 +10,15 @@ import { chatBubbleIcon, closeIcon } from './icons';
   // Get configuration from script tag
   let workspaceId: string | null = null;
   let position: 'bottom-right' | 'bottom-left' = EMBED_CONFIG.DEFAULT_POSITION;
+  let themeColor = '#406AAF';
+  const logoIcon = getLogoIcon(EMBED_CONFIG.WIDGET_URL);
   
   // Try to get the current script
   const currentScript = document.currentScript as HTMLScriptElement;
   if (currentScript) {
     workspaceId = currentScript.getAttribute('data-workspace-id');
     position = (currentScript.getAttribute('data-position') as 'bottom-right' | 'bottom-left') || EMBED_CONFIG.DEFAULT_POSITION;
+    themeColor = currentScript.getAttribute('data-theme-color') || themeColor;
   } else {
     // Fallback: find script tag by src
     const scripts = document.querySelectorAll('script[src*="embed"]');
@@ -26,6 +29,7 @@ import { chatBubbleIcon, closeIcon } from './icons';
     if (embedScript) {
       workspaceId = embedScript.getAttribute('data-workspace-id');
       position = (embedScript.getAttribute('data-position') as 'bottom-right' | 'bottom-left') || EMBED_CONFIG.DEFAULT_POSITION;
+      themeColor = embedScript.getAttribute('data-theme-color') || themeColor;
     }
   }
   
@@ -47,7 +51,7 @@ import { chatBubbleIcon, closeIcon } from './icons';
     // Create floating action button
     button = document.createElement('button');
     button.id = 'velora-widget-button';
-    button.innerHTML = chatBubbleIcon;
+    button.innerHTML = logoIcon;
     button.style.cssText = `
       position: fixed;
       ${position === 'bottom-right' ? 'right: 20px;' : 'left: 20px;'}
@@ -55,7 +59,7 @@ import { chatBubbleIcon, closeIcon } from './icons';
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: #3b82f6;
+      background: ${themeColor};
       color: white;
       border: none;
       cursor: pointer;
@@ -63,8 +67,8 @@ import { chatBubbleIcon, closeIcon } from './icons';
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 24px rgba(59, 130, 246, 0.35);
-      transition: all 0.2s ease;
+      box-shadow: 0 4px 24px ${themeColor}59;
+      transition: all 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
     `;
     
     button.addEventListener('click', toggleWidget);
@@ -84,12 +88,12 @@ import { chatBubbleIcon, closeIcon } from './icons';
       position: fixed;
       ${position === 'bottom-right' ? 'right: 20px;' : 'left: 20px;'}
       bottom: 90px;
-      width: 400px;
-      height: 600px;
+      width: 410px;
+      height: 730px;
       max-width: calc(100vw - 40px);
       max-height: calc(100vh - 110px);
       z-index: 999998;
-      border-radius: 16px;
+      border-radius: 24px;
       overflow: hidden;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
       display: none;
@@ -136,6 +140,15 @@ import { chatBubbleIcon, closeIcon } from './icons';
           container.style.height = `${payload.height}px`;
         }
         break;
+      case 'theme_update':
+        if (payload.color) {
+          themeColor = payload.color;
+          if (button) {
+            button.style.background = themeColor;
+            button.style.boxShadow = `0 4px 24px ${themeColor}59`;
+          }
+        }
+        break;
     }
   }
   
@@ -173,8 +186,9 @@ import { chatBubbleIcon, closeIcon } from './icons';
         if (container) container.style.display = 'none';
       }, 300);
       // Change button icon back to chat
-      button.innerHTML = chatBubbleIcon;
-      button.style.background = '#3b82f6';
+      button.innerHTML = logoIcon;
+      button.style.background = themeColor;
+      button.style.boxShadow = `0 4px 24px ${themeColor}59`;
     }
   }
   
@@ -193,7 +207,7 @@ import { chatBubbleIcon, closeIcon } from './icons';
   }
   
   // Function to reinitialize with new config
-  function reinit(newConfig: { workspaceId?: string; position?: 'bottom-right' | 'bottom-left' }) {
+  function reinit(newConfig: { workspaceId?: string; position?: 'bottom-right' | 'bottom-left'; themeColor?: string }) {
     // Destroy existing widget
     destroy();
     
@@ -203,6 +217,9 @@ import { chatBubbleIcon, closeIcon } from './icons';
     }
     if (newConfig.position) {
       position = newConfig.position;
+    }
+    if (newConfig.themeColor) {
+      themeColor = newConfig.themeColor;
     }
     
     // Reinitialize

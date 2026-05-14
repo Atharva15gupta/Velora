@@ -135,7 +135,7 @@ export function FooterSection() {
             alt="Velora Logo"
             height={40}
             width={40}
-            src="/velora-logo.svg"
+            src="/velora-logo.svg?v=20260514"
             className="size-30 md:size-80 "
           />
           <h4 className="font-serif text-7xl md:text-[12rem] font-medium tracking-tight">

@@ -14,7 +14,7 @@ export const Navbar = () => {
      className="bg-amber-50 border-neutral-300 border-dashed px-2 sm:px-4 py-3  backdrop-blur-3xl border-b fixed top-0 left-0 right-0 z-50 ">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-1">
         <div className="flex items-center gap-1">
-          <Image src="/velora-logo.svg" loading="eager" alt="Velora" width={36} height={36} />
+          <Image src="/velora-logo.svg?v=20260514" loading="eager" alt="Velora" width={36} height={36} />
           <span className="text-xl font-semibold tracking-tight text-[#406AAF] font-serif">
             Velora
           </span>

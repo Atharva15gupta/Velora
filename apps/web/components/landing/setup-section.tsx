@@ -41,7 +41,7 @@ export function SetupSection() {
           alt="Velora Logo"
           height={40}
           width={40}
-          src="/velora-logo.svg"
+          src="/velora-logo.svg?v=20260514"
           className="absolute right-5 md:right-8 top-3 md:top-5 size-35 md:size-50 grayscale opacity-10"
         />
         <h2 className="font-serif text-3xl md:text-5xl font-medium tracking-tighter text-[#406AAF]">
