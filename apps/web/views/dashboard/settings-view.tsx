@@ -16,7 +16,7 @@ export const SettingsView = () => {
       {/* Page header */}
       <div className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
         <div className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-          <span className="text-2xl font-semibold tracking-tight text-emerald-800">
+          <span className="text-2xl font-semibold tracking-tight text-[#406AAF]">
             Settings
           </span>
           <span className="text-sm text-neutral-500 tracking-tight leading-relaxed">
@@ -31,19 +31,19 @@ export const SettingsView = () => {
         <TabsList className="h-11! w-full bg-white/60 border border-dashed border-neutral-300 rounded-xl p-1 gap-1 mb-2">
           <TabsTrigger
             value="profile"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium tracking-tight data-[state=active]:bg-emerald-800 data-[state=active]:text-white data-[state=inactive]:text-neutral-500"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium tracking-tight data-[state=active]:bg-[#406AAF] data-[state=active]:text-white data-[state=inactive]:text-neutral-500"
           >
             Profile
           </TabsTrigger>
           <TabsTrigger
             value="workspace"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium tracking-tight data-[state=active]:bg-emerald-800 data-[state=active]:text-white data-[state=inactive]:text-neutral-500"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium tracking-tight data-[state=active]:bg-[#406AAF] data-[state=active]:text-white data-[state=inactive]:text-neutral-500"
           >
             Workspace
           </TabsTrigger>
           <TabsTrigger
             value="billing"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium tracking-tight data-[state=active]:bg-emerald-800 data-[state=active]:text-white data-[state=inactive]:text-neutral-500"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium tracking-tight data-[state=active]:bg-[#406AAF] data-[state=active]:text-white data-[state=inactive]:text-neutral-500"
           >
             Plans & Billing
           </TabsTrigger>

@@ -26,7 +26,7 @@ export const MetricCard = ({
                             </div>
                         ) : (
                             <div className="flex flex-col gap-2">
-                                <h3 className="text-4xl font-bold tracking-tight text-emerald-700 leading-none">
+                                <h3 className="text-4xl font-bold tracking-tight text-[#406AAF] leading-none">
                                     {value !== undefined
                                         ? typeof value === "number"
                                             ? value.toLocaleString()

@@ -71,7 +71,7 @@ export const IntegrationsView = () => {
         <div className="w-full h-full flex items-center p-16 flex-col gap-8 md:gap-14">
            <div className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
         <div  className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-                    <span className="flex gap-1.5 text-2xl items-center text-emerald-800 font-semibold tracking-tight">
+                    <span className="flex gap-1.5 text-2xl items-center text-[#406AAF] font-semibold tracking-tight">
                         Integrations
                     </span>
                     <span className="text-neutral-500 text-sm tracking-tight leading-relaxed">
@@ -90,7 +90,7 @@ export const IntegrationsView = () => {
                             />
                             <Button
                                 onClick={() => handleCopyId(workspaceId)}
-                                className="h-8 px-4 bg-emerald-800 border-2 border-b-4 border-emerald-700 hover:bg-emerald-900 text-white rounded-md shrink-0 transition-colors flex items-center gap-1.5 font-medium text-xs"
+                                className="h-8 px-4 bg-[#406AAF] border-2 border-b-4 border-[#406AAF] hover:bg-[#406AAF] text-white rounded-md shrink-0 transition-colors flex items-center gap-1.5 font-medium text-xs"
                             >
                                 {copiedId ? (
                                     <><Check className="size-3.5" /> Copied</>
@@ -116,7 +116,7 @@ export const IntegrationsView = () => {
                             className="rounded-xl w-full px-5 py-4 flex flex-col gap-2.5 border border-dashed border-neutral-300 bg-white/50 hover:bg-white/70 hover:border-neutral-400 hover:shadow-sm cursor-pointer transition-all"
                         >
                             <div className="flex items-center gap-2.5">
-                                <Icon className="size-5 text-emerald-700" />
+                                <Icon className="size-5 text-[#406AAF]" />
                                 <h3 className="font-semibold text-neutral-700 tracking-tight text-base">
                                     {integration.name}
                                 </h3>
@@ -151,7 +151,7 @@ export const IntegrationsView = () => {
                                     <div className="flex gap-1.5">
                                         <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-[#406AAF]"></div>
                                     </div>
                                     <span className="text-xs font-semibold text-neutral-500 tracking-tight ml-2 border px-1.5 py-0.5 rounded border-neutral-300 bg-white">Snippet</span>
                                 </div>
@@ -163,9 +163,9 @@ export const IntegrationsView = () => {
                                     onClick={() => selectedIntegration && handleCopyScript(selectedIntegration.getCode(workspaceId))}
                                 >
                                     {copiedScript ? (
-                                        <><Check className="size-3 text-emerald-600" strokeWidth={2.5} /> <span className="text-emerald-700 font-medium">Copied!</span></>
+                                        <><Check className="size-3 text-[#406AAF]" strokeWidth={2.5} /> <span className="text-[#406AAF] font-medium">Copied!</span></>
                                     ) : (
-                                        <><Copy className="size-3 text-emerald-600" strokeWidth={2.5} /> Copy Code</>
+                                        <><Copy className="size-3 text-[#406AAF]" strokeWidth={2.5} /> Copy Code</>
                                     )}
                                 </Button>
                             </div>

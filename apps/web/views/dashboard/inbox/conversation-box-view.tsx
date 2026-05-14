@@ -232,7 +232,7 @@ export const ConversationBoxView = ({
               <UiMessage
                 key={m.id}
                 from="user"
-                className="border max-w-[75%] w-fit px-3.5 py-2.5 mb-4 rounded-xl bg-emerald-800 text-white rounded-br-none border-none ml-auto"
+                className="border max-w-[75%] w-fit px-3.5 py-2.5 mb-4 rounded-xl bg-[#406AAF] text-white rounded-br-none border-none ml-auto"
               >
                 <MessageContent>
                   <MessageResponse>{m.content}</MessageResponse>
@@ -270,7 +270,7 @@ export const ConversationBoxView = ({
               <button
                 type="submit"
                 disabled={isInputEmpty || isSendingMessage}
-                className="rounded-full disabled:bg-neutral-300/50 bg-emerald-800 hover:bg-emerald-800 disabled:text-neutral-600 text-white p-2"
+                className="rounded-full disabled:bg-neutral-300/50 bg-[#406AAF] hover:bg-[#406AAF] disabled:text-neutral-600 text-white p-2"
               >
                 <Forward size={14} strokeWidth={3} />
               </button>

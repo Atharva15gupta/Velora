@@ -74,7 +74,7 @@ export const MainHeader = () => {
   }) => customer.name || customer.email || "Unknown customer";
 
   return (
-    <header className="flex h-12 shrink-0 items-center gap-2 ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 backdrop-blur-sm rounded-lg justify-between bg-neutral-500/10 hover:bg-neutral-500/10 border-b-4 border-neutral-500/15 hover:border-neutral-600/15 transition-colors duration-300 text-neutral-500 hover:text-emerald-700">
+    <header className="flex h-12 shrink-0 items-center gap-2 ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 backdrop-blur-sm rounded-lg justify-between bg-neutral-500/10 hover:bg-neutral-500/10 border-b-4 border-neutral-500/15 hover:border-neutral-600/15 transition-colors duration-300 text-neutral-500 hover:text-[#406AAF]">
       <div className="flex h-full items-center gap-2 px-4">
         <SidebarTrigger className="-ml-1" />
         <Separator
@@ -103,11 +103,11 @@ export const MainHeader = () => {
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="relative rounded-full p-1.5 text-neutral-400 hover:text-emerald-800 transition-colors duration-300 cursor-pointer"
+              className="relative rounded-full p-1.5 text-neutral-400 hover:text-[#406AAF] transition-colors duration-300 cursor-pointer"
             >
               <BellIcon className="size-4" />
               {unreadCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 min-w-3 rounded-full bg-emerald-700 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-white">
+                <span className="absolute -right-0.5 -top-0.5 min-w-3 rounded-full bg-[#406AAF] px-1.5 py-0.5 text-[9px] font-semibold leading-none text-white">
                   {unreadCount > 99 ? "99+" : unreadCount}
                 </span>
               )}
@@ -138,7 +138,7 @@ export const MainHeader = () => {
                   >
                     <div className="flex w-full items-start gap-3">
                       <span
-                        className="mt-1 size-2 rounded-full bg-emerald-600"
+                        className="mt-1 size-2 rounded-full bg-[#406AAF]"
                       />
                       <div className="flex-1 space-y-1">
                         <div className="flex items-start justify-between gap-3">
@@ -170,7 +170,7 @@ export const MainHeader = () => {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="rounded-full p-1.5 bg-neutral-500/10 text-neutral-500 hover:text-emerald-800 transition-colors duration-300 cursor-pointer">
+            <div className="rounded-full p-1.5 bg-neutral-500/10 text-neutral-500 hover:text-[#406AAF] transition-colors duration-300 cursor-pointer">
               <UserFilledIcon />
             </div>
           </DropdownMenuTrigger>
@@ -180,7 +180,7 @@ export const MainHeader = () => {
           >
             <div className="shadow-sm rounded-lg bg-white p-1">
               <DropdownMenuLabel className="font-normal flex items-center gap-2">
-                <div className="rounded-full p-1.5 bg-neutral-500/10 text-neutral-500 hover:text-emerald-800 transition-colors duration-300 cursor-pointer">
+                <div className="rounded-full p-1.5 bg-neutral-500/10 text-neutral-500 hover:text-[#406AAF] transition-colors duration-300 cursor-pointer">
                   <UserFilledIcon className="size-5" />
                 </div>
                 <div className="flex flex-col gap-0.5">

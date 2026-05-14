@@ -9,7 +9,7 @@ export const OnboardingSidebar = () => {
   const isPayment = pathname === "/payment";
   const isCreateWorkspace = pathname === "/create-workspace";
   return (
-    <div className="relative p-6 pt-3.5 flex flex-col justify-between bg-emerald-800 ">
+    <div className="relative p-6 pt-3.5 flex flex-col justify-between bg-[#406AAF] ">
       <div className="w-full flex flex-col">
         <h2 className="text-2xl tracking-tight text-white font-serif">
           Automate & Elevate Your Customer Support

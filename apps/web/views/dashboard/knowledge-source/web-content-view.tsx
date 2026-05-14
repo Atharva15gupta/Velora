@@ -118,7 +118,7 @@ export const WebContentView = () => {
     <div className="w-full h-full flex items-center p-16 flex-col gap-20">
       <div className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
         <div  className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-          <span className="flex gap-1 text-lg items-center text-emerald-800 font-semibold tracking-tight">
+          <span className="flex gap-1 text-lg items-center text-[#406AAF] font-semibold tracking-tight">
             <SquareInfo size="18" /> What is Web Content?
           </span>
           <span className="text-neutral-500 text-sm tracking-tight">
@@ -134,7 +134,7 @@ export const WebContentView = () => {
           </span>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <Button className="w-40 h-11 bg-emerald-800 border-2 border-b-4 border-emerald-700 rounded-lg mt-2 hover:bg-emerald-900">
+              <Button className="w-40 h-11 bg-[#406AAF] border-2 border-b-4 border-[#406AAF] rounded-lg mt-2 hover:bg-[#406AAF]">
                 <CirclePlus size="18" /> Add a domain
               </Button>
             </DialogTrigger>
@@ -147,7 +147,7 @@ export const WebContentView = () => {
                   ✕
                 </DialogClose>
                 <DialogHeader>
-                  <DialogTitle className="text-xl font-semibold tracking-tight text-emerald-800">
+                  <DialogTitle className="text-xl font-semibold tracking-tight text-[#406AAF]">
                     Import your Web Pages
                   </DialogTitle>
                   <DialogDescription className="text-sm text-neutral-500 leading-tight mt-0.5">
@@ -210,7 +210,7 @@ export const WebContentView = () => {
                         !form.formState.isValid
                       }
                       type="submit"
-                      className="h-11 mt-2 bg-emerald-800 hover:bg-emerald-900 rounded-lg transition-colors duration-300"
+                      className="h-11 mt-2 bg-[#406AAF] hover:bg-[#406AAF] rounded-lg transition-colors duration-300"
                     >
                       {createWebResourceMutation.isPending ? (
                         <RotateCw className="size-4 animate-spin" />
@@ -246,13 +246,13 @@ export const WebContentView = () => {
               className="rounded-xl w-full px-4 py-3.5 flex gap-5 items-center justify-between border border-neutral-300 bg-white/60"
             >
               <span className="font-semibold flex items-center gap-1.5 tracking-tight text-base text-neutral-700">
-                <Globe className="size-4 text-emerald-700" /> {resource.url}
+                <Globe className="size-4 text-[#406AAF]" /> {resource.url}
               </span>
               <span className="flex items-center gap-1.5 tracking-tight text-sm text-neutral-600 font-medium">
-                <CloudCheckIcon className="size-4 text-emerald-700" />
+                <CloudCheckIcon className="size-4 text-[#406AAF]" />
                 {(resource.webContent ?? []).length} pages crawled
               </span>
-              <span className="flex items-center gap-1.5 tracking-tight text-sm text-emerald-700 font-medium">
+              <span className="flex items-center gap-1.5 tracking-tight text-sm text-[#406AAF] font-medium">
                 {handleTimeSince(resource.updatedAt)}
               </span>
               <Switch
@@ -288,7 +288,7 @@ export const WebContentView = () => {
                         <DialogTrigger asChild>
                           <button className="cursor-pointer">
                             <RotateCw
-                              className="size-4 text-emerald-700"
+                              className="size-4 text-[#406AAF]"
                               strokeWidth={2}
                             />
                           </button>
@@ -304,7 +304,7 @@ export const WebContentView = () => {
                     >
                       <div className="flex flex-col gap-5 relative w-full rounded-xl p-5 border border-neutral-400 bg-neutral-50">
                         <DialogHeader>
-                          <DialogTitle className="text-emerald-700 tracking-tight font-semibold">
+                          <DialogTitle className="text-[#406AAF] tracking-tight font-semibold">
                             Refresh all domain pages?
                           </DialogTitle>
                           <DialogDescription className="flex flex-col gap-1 mt-1 text-neutral-500 text-sm tracking-tight">
@@ -343,7 +343,7 @@ export const WebContentView = () => {
                             }
                             type="submit"
                             disabled={crawlMutation.isPending}
-                            className=" bg-emerald-800 hover:bg-emerald-900 rounded-lg transition-colors duration-300"
+                            className=" bg-[#406AAF] hover:bg-[#406AAF] rounded-lg transition-colors duration-300"
                           >
                             <RotateCw
                               className={`size-3.5 ${crawlMutation.isPending ? "animate-spin" : ""}`}

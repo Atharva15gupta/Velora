@@ -24,7 +24,7 @@ export const HomeScreen = () => {
   const brandName = workspace?.brandName || workspace?.name || "Velora";
   const whatsNewSection = workspace?.whatsNewSection;
   const featuredArticlesSection = workspace?.featuredArticlesSection;
-  const gradientFrom = workspace?.gradientFrom || "#052e2b";
+  const gradientFrom = workspace?.gradientFrom || "#406AAF";
   const themeSurface = workspace?.themeMode === "dark" ? "#171717" : "#fafafa";
 
   const showWhatsNewSection = Boolean(

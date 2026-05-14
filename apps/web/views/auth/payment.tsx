@@ -44,7 +44,7 @@ export const PaymentView = () => {
         email: user.primaryEmailAddress?.emailAddress || "",
       },
       theme: {
-        color: "#047857",
+        color: "#406AAF",
       },
     };
 
@@ -55,7 +55,7 @@ export const PaymentView = () => {
   return (
     <div className="flex flex-col gap-7 py-7">
       <div className="flex flex-col gap-1">
-        <h2 className="text-4xl font-medium tracking-tighter font-serif text-emerald-800">
+        <h2 className="text-4xl font-medium tracking-tighter font-serif text-[#406AAF]">
           Choose your plan
         </h2>
         <p className="tracking-tght text-neutral-500 text-sm">
@@ -79,7 +79,7 @@ export const PaymentView = () => {
             <div
               key={plan.name}
               className={`relative flex h-full flex-col gap-6 border  px-6 py-8 transition-transform duration-300 hover:-translate-y-1 ${plan.highlight
-                ? "border-emerald-700 bg-emerald-900 text-white "
+                ? "border-[#406AAF] bg-[#406AAF] text-white "
                 : "border-neutral-300 border-dashed bg-white/40 text-neutral-900"
                 }`}
             >
@@ -104,7 +104,7 @@ export const PaymentView = () => {
               <button
                 className={`h-12 rounded-full px-6 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${plan.highlight
                   ? "bg-white text-neutral-900 hover:bg-neutral-100"
-                  : "bg-emerald-800 text-white hover:bg-emerald-900"
+                  : "bg-[#406AAF] text-white hover:bg-[#406AAF]"
                   }`}
                 type="button"
                 onClick={() => handleCheckout(plan.name)}
@@ -121,7 +121,7 @@ export const PaymentView = () => {
                   >
                     <Check
                       strokeWidth={3}
-                      className={`size-4 ${plan.highlight ? "text-white" : "text-emerald-600"
+                      className={`size-4 ${plan.highlight ? "text-white" : "text-[#406AAF]"
                         }`}
                     />
                     <span>{feature}</span>

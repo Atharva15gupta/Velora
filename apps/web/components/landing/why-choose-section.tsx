@@ -41,7 +41,7 @@ export function WhyChooseSection() {
         viewport={{ once: true, amount: 0.25 }}
         className="flex relative flex-col gap-2 md:gap-3 pt-40 pb-10 px-7 md:pl-10"
       >
-        <h2 className="text-3xl md:text-5xl font-medium tracking-tighter text-emerald-800 font-serif">
+        <h2 className="text-3xl md:text-5xl font-medium tracking-tighter text-[#406AAF] font-serif">
           Why choose Velora
         </h2>
         <p className="text-neutral-600 text-sm md:text-base tracking-tight pl-1 max-w-xl">
@@ -66,10 +66,10 @@ export function WhyChooseSection() {
 
               return (
                 <motion.div key={feature.title} variants={revealUp} className="flex flex-col gap-1.5 p-8">
-                  <div className="size-12 border flex justify-center items-center text-emerald-800">
+                  <div className="size-12 border flex justify-center items-center text-[#406AAF]">
                     <Icon />
                   </div>
-                  <h3 className="text-emerald-800 text-xl tracking-tight font-medium mt-2">
+                  <h3 className="text-[#406AAF] text-xl tracking-tight font-medium mt-2">
                     {feature.title}
                   </h3>
                   <p className="text-sm tracking-tight text-neutral-600 ">

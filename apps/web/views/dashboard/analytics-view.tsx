@@ -105,7 +105,7 @@ export const AnalyticsView = () => {
       {/* Header section */}
      <div className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
         <div  className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-          <span className="flex gap-1.5 text-2xl items-center text-emerald-800 font-semibold tracking-tight">
+          <span className="flex gap-1.5 text-2xl items-center text-[#406AAF] font-semibold tracking-tight">
             Analytics &amp; Insights
           </span>
           <span className="text-neutral-500 text-sm tracking-tight leading-relaxed">
@@ -293,7 +293,7 @@ export const AnalyticsView = () => {
                                 <tspan
                                   x={viewBox.cx}
                                   y={viewBox.cy}
-                                  className="fill-emerald-600 text-[28px] font-bold"
+                                  className="fill-[#406AAF] text-[28px] font-bold"
                                 >
                                   {data ? data.metrics.resolved : "0"}
                                 </tspan>
@@ -426,7 +426,7 @@ export const AnalyticsView = () => {
                     )
                   ) : (
                     <div className="flex flex-col items-center justify-center p-6 text-center border border-dashed border-neutral-200 rounded-lg bg-neutral-50/50 h-[300px]">
-                      <div className="p-3 bg-emerald-100/50 text-emerald-600 rounded-full mb-3">
+                      <div className="p-3 bg-[#406AAF]/10 text-[#406AAF] rounded-full mb-3">
                         <CheckCircle className="size-5" />
                       </div>
                       <p className="text-sm font-medium text-neutral-800 tracking-tight mb-1">
@@ -466,7 +466,7 @@ export const AnalyticsView = () => {
               ) : (
                 <>
                   <div className="flex justify-center gap-1 flex-col items-center">
-                    <span className="text-4xl font-bold tracking-tight text-emerald-700">
+                    <span className="text-4xl font-bold tracking-tight text-[#406AAF]">
                       {data?.knowledge?.coveragePercent || 0}%
                     </span>
                     <p className="text-sm tracking-tight text-neutral-500 font-medium">
@@ -476,11 +476,11 @@ export const AnalyticsView = () => {
                   </div>
                   <div className="flex gap-4 mt-3.5 tracking-tight text-xs font-medium text-neutral-500 justify-between">
                     <div className="flex items-center gap-1.5 border px-2 py-1 rounded-md">
-                      <div className="size-1.5 rounded-full bg-emerald-600"></div>
+                      <div className="size-1.5 rounded-full bg-[#406AAF]"></div>
                       {data?.knowledge?.webResources || 0} Web sources
                     </div>
                     <div className="flex items-center gap-1.5 border px-2 py-1 rounded-md">
-                      <div className="size-1.5 rounded-full bg-emerald-500"></div>
+                      <div className="size-1.5 rounded-full bg-[#406AAF]"></div>
                       {data?.knowledge?.fileResources || 0} Uploaded files
                     </div>
                   </div>
@@ -513,7 +513,7 @@ export const AnalyticsView = () => {
                       <span className="text-xs text-neutral-500 font-medium">
                         Most Active Day
                       </span>
-                      <span className="text-sm font-semibold text-emerald-700">
+                      <span className="text-sm font-semibold text-[#406AAF]">
                         {data?.supportDemand?.busiestDay || "N/A"}
                       </span>
                     </div>
@@ -521,7 +521,7 @@ export const AnalyticsView = () => {
                       <span className="text-xs text-neutral-500 font-medium">
                         Most Active Hour
                       </span>
-                      <span className="text-sm font-semibold text-emerald-700">
+                      <span className="text-sm font-semibold text-[#406AAF]">
                         {data?.supportDemand?.busiestHour || "N/A"}
                       </span>
                     </div>
@@ -529,7 +529,7 @@ export const AnalyticsView = () => {
                       <span className="text-xs text-neutral-500 font-medium">
                         Avg Requests Per Day
                       </span>
-                      <span className="text-sm font-semibold text-emerald-700">
+                      <span className="text-sm font-semibold text-[#406AAF]">
                         {data?.supportDemand?.avgDailyRequests || 0}
                       </span>
                     </div>

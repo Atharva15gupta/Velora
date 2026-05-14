@@ -20,7 +20,7 @@ export const HelpAndSupportView = () => {
     <div className="max-w-6xl mx-auto px-4 py-14 space-y-5">
       <div className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
         <div className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-          <span className="text-2xl font-semibold tracking-tight text-emerald-800">
+          <span className="text-2xl font-semibold tracking-tight text-[#406AAF]">
             Help &amp; Support
           </span>
           <span className="text-sm text-neutral-500 tracking-tight leading-relaxed">
@@ -46,7 +46,7 @@ export const HelpAndSupportView = () => {
       </SectionCard>
 
       <SectionCard
-        icon={<IconMessageChatbotFilled className="size-7 text-emerald-700" />}
+        icon={<IconMessageChatbotFilled className="size-7 text-[#406AAF]" />}
         title="Contact the Developer"
         description="Reach out for help or collaboration."
       >

@@ -30,11 +30,11 @@ export const SuccessPageView = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-50 p-4">
-      <div className="p-2.5 bg-emerald-800/10 rounded-2xl">
+      <div className="p-2.5 bg-[#406AAF]/10 rounded-2xl">
         <div className="w-full max-w-sm bg-white rounded-2xl text-center">
-          <div className="bg-emerald-800 p-5 rounded-t-2xl">
+          <div className="bg-[#406AAF] p-5 rounded-t-2xl">
             <div className="flex justify-center mb-5">
-              <div className="size-16 bg-white rounded-full flex items-center justify-center text-emerald-700">
+              <div className="size-16 bg-white rounded-full flex items-center justify-center text-[#406AAF]">
                 <CircleCheckBig className="size-9" strokeWidth={2.5} />
               </div>
             </div>
@@ -54,9 +54,9 @@ export const SuccessPageView = () => {
               {isSyncing ? (
                 <Loader2 className="size-4 text-neutral-400 animate-spin" />
               ) : (
-                <Check className="size-4 text-emerald-700" strokeWidth={3.5} />
+                <Check className="size-4 text-[#406AAF]" strokeWidth={3.5} />
               )}
-              <span className={`text-sm text-neutral-600 font-medium tracking-tight ${isSyncing ? " animate-pulse" : "text-green-600"}`}>
+              <span className={`text-sm text-neutral-600 font-medium tracking-tight ${isSyncing ? " animate-pulse" : "text-[#406AAF]"}`}>
                 {isSyncing ? "Syncing subscription..." : "Subscription synced"}
               </span>
             </div>

@@ -118,8 +118,8 @@ model WidgetSettings {
   companyLogoUrl     String?
   greetMessage       String    @default("Hi! How can I help you today?")
   themeMode          String    @default("light")
-  gradientFrom       String    @default("#052e2b")
-  themeColor         String    @default("#047857")
+  gradientFrom       String    @default("#406AAF")
+  themeColor         String    @default("#406AAF")
   defaultSuggestions Json?
   whatsNewSection    Json?
   featuredArticlesSection Json?

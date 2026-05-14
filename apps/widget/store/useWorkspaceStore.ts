@@ -40,11 +40,11 @@ const normalizeWorkspace = (workspace: Workspace): Workspace => ({
   companyLogoUrl: workspace.companyLogoUrl ?? null,
   greetMessage: workspace.greetMessage ?? null,
   themeMode: workspace.themeMode ?? "light",
-  gradientFrom: workspace.gradientFrom ?? "#052e2b",
+  gradientFrom: workspace.gradientFrom ?? "#406AAF",
   themeColor:
     workspace.themeColor ??
     (workspace as Workspace & { gradientTo?: string | null }).gradientTo ??
-    "#047857",
+    "#406AAF",
   defaultSuggestions:
     normalizeSuggestions(workspace.defaultSuggestions) ?? null,
   whatsNewSection: normalizeSection(workspace.whatsNewSection),

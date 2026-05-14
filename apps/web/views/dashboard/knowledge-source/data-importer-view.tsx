@@ -81,7 +81,7 @@ export const DataImporterView = () => {
           <div className="w-full h-full rounded-lg flex gap-16 items-center ">
             <DragAndDrop />
             <div className="flex h-full border-l pl-5 flex-col gap-3.5 justify-center">
-              <span className="flex gap-1 text-sm items-center text-emerald-800 font-semibold tracking-tight">
+              <span className="flex gap-1 text-sm items-center text-[#406AAF] font-semibold tracking-tight">
                 <SquareInfo size="18" /> What file types are supported?
               </span>
               <span className="text-neutral-500 text-xs tracking-tight max-w-3xs">
@@ -247,7 +247,7 @@ export const DataImporterView = () => {
                           <div className="flex items-center gap-1">
                             <CircleCheck
                               strokeWidth={2.5}
-                              className="inline size-3.5 text-center text-green-600"
+                              className="inline size-3.5 text-center text-[#406AAF]"
                             />
                             Active
                           </div>

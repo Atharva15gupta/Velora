@@ -43,7 +43,7 @@ export const sendEscalationEmail = async ({
       <p style="margin: 0 0 16px; padding: 12px; background: #f3f4f6; border-radius: 8px;">${escapeHtml(messagePreview)}</p>
       <a
         href="${escapeHtml(conversationUrl)}"
-        style="display: inline-block; padding: 10px 16px; background: #065f46; color: #ffffff; text-decoration: none; border-radius: 8px;"
+        style="display: inline-block; padding: 10px 16px; background: #406AAF; color: #ffffff; text-decoration: none; border-radius: 8px;"
       >
         Open conversation
       </a>

@@ -60,7 +60,7 @@ export const BillingTab = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {currentFeatures.map((f) => (
                                 <div key={f} className="flex items-center gap-2 text-sm text-neutral-600">
-                                    <Check className="size-4 text-emerald-600 shrink-0" strokeWidth={3} />
+                                    <Check className="size-4 text-[#406AAF] shrink-0" strokeWidth={3} />
                                     {f}
                                 </div>
                             ))}

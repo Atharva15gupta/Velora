@@ -66,11 +66,11 @@ export const DragAndDrop = () => {
 
   return (
     <div
-      className={`flex-1 h-full p-0.5 ${isDragActive && "bg-emerald-100"} ${isDragReject && "bg-red-100"} rounded-lg`}
+      className={`flex-1 h-full p-0.5 ${isDragActive && "bg-[#406AAF]/10"} ${isDragReject && "bg-red-100"} rounded-lg`}
     >
       {showSuccess && !isUploading ? (
         <div className="border h-full rounded-lg flex flex-col items-center justify-center gap-2">
-          <span className="flex gap-1 items-center text-sm font-semibold text-emerald-800">
+          <span className="flex gap-1 items-center text-sm font-semibold text-[#406AAF]">
             <SquareCheckBig size={16} />
             Document imported successfully
           </span>
@@ -95,7 +95,7 @@ export const DragAndDrop = () => {
             : isDragReject
               ? "border-red-500 bg-white/70 cursor-pointer"
               : isDragActive
-                ? "border-emerald-500 bg-white/70 hover:bg-white/80 cursor-pointer"
+                ? "border-[#406AAF] bg-white/70 hover:bg-white/80 cursor-pointer"
                 : "border-neutral-300 bg-white/70 hover:bg-white/80 cursor-pointer"
             }`}
         >

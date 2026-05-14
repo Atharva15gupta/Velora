@@ -15,7 +15,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-1">
         <div className="flex items-center gap-1">
           <Image src="/velora-logo.svg" loading="eager" alt="Velora" width={36} height={36} />
-          <span className="text-xl font-semibold tracking-tight text-emerald-800 font-serif">
+          <span className="text-xl font-semibold tracking-tight text-[#406AAF] font-serif">
             Velora
           </span>
         </div>
@@ -51,7 +51,7 @@ export const Navbar = () => {
           </Button>
           <Button
             asChild
-            className="rounded-full bg-emerald-800 px-5 text-white hover:bg-emerald-900 "
+            className="rounded-full bg-[#406AAF] px-5 text-white hover:bg-[#406AAF] "
           >
             <Link href="/sign-up">Get Started</Link>
           </Button>

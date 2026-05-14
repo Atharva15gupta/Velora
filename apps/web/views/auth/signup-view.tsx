@@ -200,7 +200,7 @@ export const SignupView = () => {
           />
           <Button
             type="submit"
-            className="w-full h-12 mt-2 bg-emerald-800 hover:bg-emerald-900 rounded-none transition-colors duration-300"
+            className="w-full h-12 mt-2 bg-[#406AAF] hover:bg-[#406AAF] rounded-none transition-colors duration-300"
             disabled={signupMutation.isPending}
           >
             {signupMutation.isPending ? "Creating account..." : "Sign Up"}
@@ -211,7 +211,7 @@ export const SignupView = () => {
           className="mt-4 inline-block text-sm text-neutral-400 self-center trcaking-tight "
         >
           Already have an account?{" "}
-          <span className="font-medium text-emerald-700 hover:underline hover:text-emerald-900 transition-colors duration-300">
+          <span className="font-medium text-[#406AAF] hover:underline hover:text-[#406AAF] transition-colors duration-300">
             Login
           </span>
         </Link>

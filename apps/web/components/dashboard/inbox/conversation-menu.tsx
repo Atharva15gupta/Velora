@@ -100,7 +100,7 @@ export const ConversationMenu = () => {
                   <CheckIcon
                     size={17}
                     strokeWidth={3.5}
-                    className="text-green-600"
+                    className="text-[#406AAF]"
                   />
                   <span className="text-sm text-neutral-700 font-medium tracking-tight">
                     Resolved
@@ -151,7 +151,7 @@ export const ConversationMenu = () => {
                   <CheckIcon
                     size={17}
                     strokeWidth={3.5}
-                    className="text-green-600"
+                    className="text-[#406AAF]"
                   />
                 )}
                 {conversation.status === "escalated" && (

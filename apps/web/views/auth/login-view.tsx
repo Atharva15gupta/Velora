@@ -141,7 +141,7 @@ export const LoginView = () => {
           <Button
             type="submit"
             disabled={loginMutation.isPending}
-            className="w-full h-12 mt-2 bg-emerald-800 hover:bg-emerald-900 rounded-none transition-colors duration-300"
+            className="w-full h-12 mt-2 bg-[#406AAF] hover:bg-[#406AAF] rounded-none transition-colors duration-300"
           >
             {loginMutation.isPending ? "Logging in..." : "Login"}
           </Button>
@@ -151,7 +151,7 @@ export const LoginView = () => {
           className="mt-4 inline-block text-sm text-neutral-400 self-center tracking-tight"
         >
           Don't have an account?{" "}
-          <span className="font-medium text-emerald-700 hover:underline hover:text-emerald-900 transition-colors duration-300">
+          <span className="font-medium text-[#406AAF] hover:underline hover:text-[#406AAF] transition-colors duration-300">
             Signup
           </span>
         </Link>

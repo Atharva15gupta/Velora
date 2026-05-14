@@ -44,8 +44,8 @@ export const GetStartedView = () => {
       <div className="flex w-full max-w-6xl flex-col gap-12">
         <section className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
           <div className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-            <h2 className="flex items-center gap-2.5 text-3xl font-semibold tracking-tight text-emerald-800">
-              Get Started <IconRocket className="size-7 text-emerald-700" />
+            <h2 className="flex items-center gap-2.5 text-3xl font-semibold tracking-tight text-[#406AAF]">
+              Get Started <IconRocket className="size-7 text-[#406AAF]" />
             </h2>
             <p className="text-sm text-neutral-500 mb-3.5 tracking-tight">
               Set up your AI-powered customer support in minutes. Complete each
@@ -57,13 +57,13 @@ export const GetStartedView = () => {
                 <p className="text-sm font-semibold tracking-tight text-neutral-600">
                   {completedCount} / {steps.length} setup steps completed
                 </p>
-                <p className="text-xs font-semibold text-emerald-700 tracking-tight">
+                <p className="text-xs font-semibold text-[#406AAF] tracking-tight">
                   {completionPercentage}% complete
                 </p>
               </div>
               <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-neutral-200">
                 <div
-                  className="h-full rounded-full bg-emerald-700 transition-all duration-300"
+                  className="h-full rounded-full bg-[#406AAF] transition-all duration-300"
                   style={{ width: `${completionPercentage}%` }}
                 />
               </div>
@@ -87,7 +87,7 @@ export const GetStartedView = () => {
                       <div className="pt-0.5">
                         {isCompleted ? (
                           <CircleCheckBig
-                            className="size-5 text-emerald-700"
+                            className="size-5 text-[#406AAF]"
                             strokeWidth={2.5}
                           />
                         ) : (
@@ -98,7 +98,7 @@ export const GetStartedView = () => {
                         )}
                       </div>
                       <div className="flex-1">
-                        <p className="text-xs font-bold tracking-wide text-emerald-700">
+                        <p className="text-xs font-bold tracking-wide text-[#406AAF]">
                           STEP {index + 1}
                         </p>
                         <h3 className="mt-0.5 text-base font-semibold tracking-tight text-neutral-700">
@@ -125,7 +125,7 @@ export const GetStartedView = () => {
                         <Button
                           key={action.href}
                           asChild
-                          className="bg-emerald-800 hover:bg-emerald-900 border-2 border-b-4 border-emerald-700 text-xs tracking-tight px-3 h-8 rounded-lg active:scale-95 transition-transform"
+                          className="bg-[#406AAF] hover:bg-[#406AAF] border-2 border-b-4 border-[#406AAF] text-xs tracking-tight px-3 h-8 rounded-lg active:scale-95 transition-transform"
                         >
                           <Link href={action.href}>{action.label}</Link>
                         </Button>

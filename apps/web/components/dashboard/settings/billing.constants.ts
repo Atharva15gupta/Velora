@@ -2,7 +2,7 @@ export const PLAN_META = {
     STARTER: {
         label: "Starter",
         price: "₹499 / mo",
-        color: "text-emerald-700",
+        color: "text-[#406AAF]",
         bg: "bg-white/80",
         border: "border-neutral-300",
     },

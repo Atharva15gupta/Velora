@@ -78,8 +78,8 @@ export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
           width="250"
           height="80"
           transform="matrix(0.866025 -0.5 0 1 330.947 287.5)"
-          fill="#006045"
-          stroke="#006045"
+          fill="#406AAF"
+          stroke="#406AAF"
           strokeWidth="1"
           strokeLinejoin="round"
         />
@@ -91,29 +91,29 @@ export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
           width="250"
           height="80"
           transform="matrix(0.866025 0.5 0 1 71.1393 162.5)"
-          fill="#006045"
-          stroke="#006045"
+          fill="#406AAF"
+          stroke="#406AAF"
           strokeWidth="1"
           strokeLinejoin="round"
         />
         <path
           d="M62.1713 150C62.1713 154.882 65.5984 159.301 71.1393 162.5V242.5C65.5984 239.301 62.1713 234.882 62.1713 230V150Z"
-          fill="#006045"
-          stroke="#006045"
+          fill="#406AAF"
+          stroke="#406AAF"
           strokeWidth="1"
           strokeLinejoin="round"
         />
         <path
           d="M287.646 287.5C299.603 294.404 318.99 294.404 330.947 287.5V367.5C318.99 374.404 299.603 374.404 287.646 367.5V287.5Z"
-          fill="#006045"
-          stroke="#006045"
+          fill="#406AAF"
+          stroke="#406AAF"
           strokeWidth="1"
           strokeLinejoin="round"
         />
         <path
           d="M556.421 150C556.421 154.882 552.994 159.301 547.453 162.5V242.5C552.994 239.301 556.421 234.882 556.421 230V150Z"
-          fill="#006045"
-          stroke="#006045"
+          fill="#406AAF"
+          stroke="#406AAF"
           strokeWidth="1"
           strokeLinejoin="round"
         />
@@ -121,7 +121,7 @@ export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
 
       <motion.path
         d="M287.311 12.5C299.269 5.59644 318.655 5.59644 330.613 12.5L547.119 137.5C559.076 144.404 559.076 155.596 547.119 162.5L330.613 287.5C318.655 294.404 299.269 294.404 287.311 287.5L70.8051 162.5C58.8478 155.596 58.8478 144.404 70.8051 137.5L287.311 12.5Z"
-        stroke="#006045"
+        stroke="#406AAF"
         strokeWidth="2"
         initial={{ opacity: 0, y: -46, pathLength: 0 }}
         animate={strokeControls}
@@ -135,7 +135,7 @@ export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M287.284 207.058C265.658 219.544 231.757 220.247 211.628 208.625C192.889 197.806 192.63 180.123 210.18 167.655C187.46 147.704 192.856 119.616 225.357 100.851C257.857 82.0873 306.507 78.9717 341.066 92.0876C362.66 81.9565 393.288 82.1062 412.027 92.9253C430.618 103.659 431.008 121.137 413.966 133.574C435.327 153.44 429.582 180.907 397.645 199.346C397.324 199.531 397.043 199.694 396.719 199.881L396.68 199.904C388.544 204.601 378.415 206.379 374.068 203.87C369.682 201.337 372.765 195.491 380.901 190.794C389.076 186.074 399.202 184.294 403.588 186.826C404.3 187.237 404.852 187.742 405.162 188.34C423.594 172.289 425.121 152.106 409.312 136.605L338.695 95.8348C306.566 83.0069 260.427 85.7103 229.779 103.405C199.131 121.099 194.449 147.737 216.668 166.287L287.284 207.058ZM362.896 149.987C372.369 156.897 369.04 168.555 354.704 176.832C340.407 185.086 320.214 187.008 308.247 181.539C320.203 182.816 335.505 179.653 347.547 172.7C359.629 165.724 365.109 156.89 362.896 149.987Z"
-          fill="#006045"
+          fill="#406AAF"
           style={{ transformBox: "fill-box", transformOrigin: "center" }}
           initial={{ opacity: 0, y: -72, scale: 0.82 }}
           animate={logoControls}

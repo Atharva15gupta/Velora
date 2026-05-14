@@ -76,7 +76,7 @@ export function FooterSection() {
           viewport={{ once: true, amount: 0.25 }}
           className="flex flex-col p-7 md:p-10"
         >
-          <span className="text-3xl font-semibold tracking-tight text-emerald-800 font-serif mb-0.5">
+          <span className="text-3xl font-semibold tracking-tight text-[#406AAF] font-serif mb-0.5">
             Velora
           </span>
           <p className="text-xs text-neutral-500 font-medium tracking-tight">
@@ -104,7 +104,7 @@ export function FooterSection() {
         >
           {footerGroups.map((group) => (
             <motion.div key={group.title} variants={revealUp} className="flex flex-col gap-1.5 p-4 md:p-10">
-              <h3 className="text-sm md:text-base font-semibold text-emerald-800 font-serif">
+              <h3 className="text-sm md:text-base font-semibold text-[#406AAF] font-serif">
                 {group.title}
               </h3>
               <div className="flex flex-col gap-1 text-xs md:text-sm text-neutral-500">

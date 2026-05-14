@@ -89,7 +89,7 @@ export const HeroSection = () => {
           <HeroIllustration className="block sm:hidden h-auto w-full max-w-[300px] rounded-md mx-auto mb-15" />
           <motion.h1
             variants={heroItemVariants}
-            className="max-w-sm sm:max-w-5xl text-[1.7rem] sm:text-5xl sm:text-center font-medium tracking-tight text-emerald-800 md:text-6xl font-serif leading-[1.09]"
+            className="max-w-sm sm:max-w-5xl text-[1.7rem] sm:text-5xl sm:text-center font-medium tracking-tight text-[#406AAF] md:text-6xl font-serif leading-[1.09]"
           >
             AI support agent that actually understands your business
           </motion.h1>
@@ -106,7 +106,7 @@ export const HeroSection = () => {
           <Button
             asChild
             size="lg"
-            className="rounded-full bg-emerald-800 px-6 text-white hover:bg-emerald-900"
+            className="rounded-full bg-[#406AAF] px-6 text-white hover:bg-[#406AAF]"
           >
             <Link href="/sign-up">
               Get Started
@@ -147,7 +147,7 @@ export const HeroSection = () => {
           {supportFlow.map((item, index) => (
             <div
               key={index}
-              className="flex px-4 py-3 bg-emerald-700 text-white font-semibold rounded-2xl text-xs max-w-2xs"
+              className="flex px-4 py-3 bg-[#406AAF] text-white font-semibold rounded-2xl text-xs max-w-2xs"
             >
               {item.reply}
             </div>

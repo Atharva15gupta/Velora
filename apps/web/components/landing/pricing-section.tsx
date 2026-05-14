@@ -23,7 +23,7 @@ export function PricingSection() {
         viewport={{ once: true, amount: 0.25 }}
         className="flex relative flex-col gap-3 max-w-xl px-7 pt-40"
       >
-        <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-emerald-800 font-serif">
+        <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-[#406AAF] font-serif">
           Pricing that scales with your business
         </h2>
         <p className="text-sm md:text-base text-neutral-600 tracking-tight pl-1">
@@ -33,7 +33,7 @@ export function PricingSection() {
         <Button
           asChild
           size="lg"
-          className="rounded-full bg-emerald-800 px-6 border-[1.5px] border-emerald-700 hover:bg-emerald-700 w-fit mt-2"
+          className="rounded-full bg-[#406AAF] px-6 border-[1.5px] border-[#406AAF] hover:bg-[#406AAF] w-fit mt-2"
         >
           <Link href="/pricing">Explore Pricing</Link>
         </Button>

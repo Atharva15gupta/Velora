@@ -41,7 +41,7 @@ export const WidgetView = ({ workspaceId }: { workspaceId: string }) => {
     error: <ErrorScreen />,
   };
 
-  const widgetAccentColor = workspace?.themeColor ?? "#047857";
+  const widgetAccentColor = workspace?.themeColor ?? "#406AAF";
   const widgetStyles = {
     "--widget-theme-color": widgetAccentColor,
   } as CSSProperties;

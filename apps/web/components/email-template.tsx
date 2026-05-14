@@ -25,7 +25,7 @@ interface EmailTemplateProps {
 }
 
 const priorityColors: Record<string, { bg: string; text: string; label: string }> = {
-    low: { bg: "#d1fae5", text: "#065f46", label: "LOW" },
+    low: { bg: "#406AAF1A", text: "#406AAF", label: "LOW" },
     medium: { bg: "#fef3c7", text: "#92400e", label: "MEDIUM" },
     high: { bg: "#fee2e2", text: "#b91c1c", label: "HIGH" },
     critical: { bg: "#fee2e2", text: "#b91c1c", label: "CRITICAL" },

@@ -146,7 +146,7 @@ export default function WidgetCustomizationView() {
     <div className="w-full h-full flex items-center p-16 flex-col gap-12 overflow-y-auto no-scrollbar">
       <div className="rounded-2xl w-full p-2 max-w-6xl h-fit bg-neutral-500/10 pb-6">
         <div className="flex flex-col gap-2 w-full h-full border border-neutral-300 rounded-xl p-5 bg-white/60">
-          <span className="flex gap-1 text-2xl items-center text-emerald-800 font-semibold tracking-tight">
+          <span className="flex gap-1 text-2xl items-center text-[#406AAF] font-semibold tracking-tight">
             {/* <SquareInfo size="18" />  */}
             Widget Customization
           </span>
@@ -306,7 +306,7 @@ export default function WidgetCustomizationView() {
                           id={field.name}
                           aria-invalid={fieldState.invalid}
                           className="border border-neutral-300 bg-white px-3"
-                          placeholder="#052e2b"
+                          placeholder="#406AAF"
                         />
                       </div>
                       {fieldState.invalid ? (
@@ -334,7 +334,7 @@ export default function WidgetCustomizationView() {
                           id={field.name}
                           aria-invalid={fieldState.invalid}
                           className="border border-neutral-300 bg-white px-3"
-                          placeholder="#047857"
+                          placeholder="#406AAF"
                         />
                       </div>
                       {fieldState.invalid ? (

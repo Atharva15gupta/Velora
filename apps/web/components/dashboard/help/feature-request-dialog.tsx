@@ -75,7 +75,7 @@ export const FeatureRequestDialog = () => {
             <X className="size-4" />
           </DialogClose>
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold tracking-tight text-emerald-800">
+            <DialogTitle className="text-xl font-semibold tracking-tight text-[#406AAF]">
               Request a Feature
             </DialogTitle>
             <DialogDescription className="text-sm text-neutral-500 leading-tight mt-0.5">

@@ -17,10 +17,10 @@ export const ConversationStatusButton = ({
         <Button
           onClick={onClick}
           variant={"outline"}
-          className="rounded-lg bg-green-100 text-green-700 border-green-400 hover:bg-green-200/60 shadow-none"
+          className="rounded-lg bg-[#406AAF]/10 text-[#406AAF] border-[#406AAF] hover:bg-[#406AAF]/20/60 shadow-none"
           disabled={disabled}
         >
-          <CheckIcon size={17} strokeWidth={3.5} className="text-green-600" />
+          <CheckIcon size={17} strokeWidth={3.5} className="text-[#406AAF]" />
           <span className="text-sm text-neutral-700 font-medium tracking-tight">
             Resolved
           </span>

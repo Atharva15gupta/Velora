@@ -44,7 +44,7 @@ export function SetupSection() {
           src="/velora-logo.svg"
           className="absolute right-5 md:right-8 top-3 md:top-5 size-35 md:size-50 grayscale opacity-10"
         />
-        <h2 className="font-serif text-3xl md:text-5xl font-medium tracking-tighter text-emerald-800">
+        <h2 className="font-serif text-3xl md:text-5xl font-medium tracking-tighter text-[#406AAF]">
           Setup in minutes
         </h2>
         <p className="max-w-xl text-sm md:text-base tracking-tight text-neutral-600">
@@ -74,10 +74,10 @@ export function SetupSection() {
                   variants={revealUp}
                   className="flex flex-col gap-1.5 p-8"
                 >
-                  <div className="flex size-12 items-center justify-center border text-emerald-800">
+                  <div className="flex size-12 items-center justify-center border text-[#406AAF]">
                     <Icon />
                   </div>
-                  <h3 className="mt-2 text-xl font-medium tracking-tight text-emerald-800">
+                  <h3 className="mt-2 text-xl font-medium tracking-tight text-[#406AAF]">
                     {item.title}
                   </h3>
                   <p className="text-sm tracking-tight text-neutral-600">
