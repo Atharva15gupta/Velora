@@ -36,13 +36,13 @@ export const RecentMessageCard = ({
           <div className="hidden md:flex h-10 w-10 rounded-full items-center justify-center text-xs font-semibold">
             {workspace?.companyLogoUrl ? (
               <img
-                src={workspace.companyLogoUrl ?? "/velora-logo.svg?v=20260514"}
+                src={workspace.companyLogoUrl ?? "/velora-logo.svg?v=202605142258"}
                 alt={`${brandName} logo`}
                 className="h-[39px] w-[39px] rounded-full shadow object-cover"
               />
             ) : (
               <Image
-                src="/velora-logo.svg?v=20260514"
+                src="/velora-logo.svg?v=202605142258"
                 alt="avatar"
                 width={39}
                 height={39}

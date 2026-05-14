@@ -1,5 +1,5 @@
 export const getLogoIcon = (widgetUrl: string) => {
-  const logoUrl = `${new URL(widgetUrl).origin}/velora-logo.svg?v=20260514`;
+  const logoUrl = `${new URL(widgetUrl).origin}/velora-logo.svg?v=202605142258`;
 
   return `<img src="${logoUrl}" alt="Velora" style="width: 38px; height: 38px; object-fit: contain; display: block;" />`;
 };

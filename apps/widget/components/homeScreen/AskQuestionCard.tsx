@@ -38,7 +38,7 @@ export const AskQuestionCard = ({
           />
         ) : (
           <Image
-            src="/velora-logo.svg?v=20260514"
+            src="/velora-logo.svg?v=202605142258"
             alt="avatar"
             width={39}
             height={39}

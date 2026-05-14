@@ -125,11 +125,11 @@ export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
       />
 
       <motion.image
-        href="/velora-logo.svg?v=20260514"
-        x="238"
-        y="72"
-        width="150"
-        height="150"
+        href="/velora-logo.svg?v=202605142258"
+        x="192"
+        y="30"
+        width="240"
+        height="240"
         preserveAspectRatio="xMidYMid meet"
         style={{ transformBox: "fill-box", transformOrigin: "center" }}
         initial={{ opacity: 0, y: -72, scale: 0.82 }}
