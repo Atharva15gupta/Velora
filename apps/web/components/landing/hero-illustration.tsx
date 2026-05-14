@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId } from "react";
+import { useEffect } from "react";
 import { motion, useAnimationControls } from "motion/react";
 
 type HeroIllustrationProps = {
@@ -10,9 +10,6 @@ type HeroIllustrationProps = {
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
-  const uid = useId().replace(/:/g, "");
-  const logoMaskId = `hero-logo-mask-${uid}`;
-
   const baseControls = useAnimationControls();
   const strokeControls = useAnimationControls();
   const logoControls = useAnimationControls();
@@ -127,20 +124,17 @@ export const HeroIllustration = ({ className }: HeroIllustrationProps) => {
         animate={strokeControls}
       />
 
-      <mask id={logoMaskId} style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="125" y="43" width="373" height="215">
-        <path d="M125.154 158.703L325.558 43L497.154 142.071L296.751 257.774L125.154 158.703Z" fill="white" />
-      </mask>
-      <g mask={`url(#${logoMaskId})`}>
-        <motion.path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M287.284 207.058C265.658 219.544 231.757 220.247 211.628 208.625C192.889 197.806 192.63 180.123 210.18 167.655C187.46 147.704 192.856 119.616 225.357 100.851C257.857 82.0873 306.507 78.9717 341.066 92.0876C362.66 81.9565 393.288 82.1062 412.027 92.9253C430.618 103.659 431.008 121.137 413.966 133.574C435.327 153.44 429.582 180.907 397.645 199.346C397.324 199.531 397.043 199.694 396.719 199.881L396.68 199.904C388.544 204.601 378.415 206.379 374.068 203.87C369.682 201.337 372.765 195.491 380.901 190.794C389.076 186.074 399.202 184.294 403.588 186.826C404.3 187.237 404.852 187.742 405.162 188.34C423.594 172.289 425.121 152.106 409.312 136.605L338.695 95.8348C306.566 83.0069 260.427 85.7103 229.779 103.405C199.131 121.099 194.449 147.737 216.668 166.287L287.284 207.058ZM362.896 149.987C372.369 156.897 369.04 168.555 354.704 176.832C340.407 185.086 320.214 187.008 308.247 181.539C320.203 182.816 335.505 179.653 347.547 172.7C359.629 165.724 365.109 156.89 362.896 149.987Z"
-          fill="#406AAF"
-          style={{ transformBox: "fill-box", transformOrigin: "center" }}
-          initial={{ opacity: 0, y: -72, scale: 0.82 }}
-          animate={logoControls}
-        />
-      </g>
+      <motion.image
+        href="/velora-logo.svg?v=20260514"
+        x="238"
+        y="72"
+        width="150"
+        height="150"
+        preserveAspectRatio="xMidYMid meet"
+        style={{ transformBox: "fill-box", transformOrigin: "center" }}
+        initial={{ opacity: 0, y: -72, scale: 0.82 }}
+        animate={logoControls}
+      />
     </svg>
   );
 };
