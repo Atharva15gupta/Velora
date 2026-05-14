@@ -15,6 +15,8 @@ const removeUploadedFile = async (path?: string) => {
 };
 
 export const createFileResource = async (req: Request, res: Response) => {
+  let resourceIdToCleanup: string | null = null;
+
   try {
     const workspace = req.workspace!;
     const workspaceId = workspace.id;
@@ -61,6 +63,7 @@ export const createFileResource = async (req: Request, res: Response) => {
         sourceType: "FILE",
       },
     });
+    resourceIdToCleanup = resource.id;
 
     const docsWithMeta = docs.map(
       (doc) =>
@@ -89,12 +92,18 @@ export const createFileResource = async (req: Request, res: Response) => {
     }
 
     await vectorStore.addDocuments(splitDocs);
+    resourceIdToCleanup = null;
 
     await fs.promises.unlink(file.path);
 
     return res.json({ success: true, resource });
   } catch (error) {
     console.error("createFileResource failed", error);
+    if (resourceIdToCleanup) {
+      await prisma.resource
+        .delete({ where: { id: resourceIdToCleanup } })
+        .catch(() => undefined);
+    }
     await removeUploadedFile(req.file?.path);
     return res
       .status(500)
@@ -103,6 +112,8 @@ export const createFileResource = async (req: Request, res: Response) => {
 };
 
 export const createWebResource = async (req: Request, res: Response) => {
+  let resourceIdToCleanup: string | null = null;
+
   try {
     const workspace = req.workspace!;
     const { url, paths } = req.body as {
@@ -151,6 +162,7 @@ export const createWebResource = async (req: Request, res: Response) => {
         paths: normalizedPaths,
       },
     });
+    resourceIdToCleanup = resource.id;
 
     const docsWithMeta: Document[] = crawled.map(({ page, content }) => {
       return new Document({
@@ -179,11 +191,8 @@ export const createWebResource = async (req: Request, res: Response) => {
         .json({ success: false, message: "Failed to access vector store" });
     }
 
-    try {
-      await vectorStore.addDocuments(splitDocs);
-    } catch (e: any) {
-      return res.status(500).json({ success: false, message: `Render Stack [VectorStore.addDocuments]: ${e.stack || String(e)}` });
-    }
+    await vectorStore.addDocuments(splitDocs);
+    resourceIdToCleanup = null;
 
     return res.json({
       success: true,
@@ -193,6 +202,11 @@ export const createWebResource = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.error("createWebResource failed", error);
+    if (resourceIdToCleanup) {
+      await prisma.resource
+        .delete({ where: { id: resourceIdToCleanup } })
+        .catch(() => undefined);
+    }
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });
