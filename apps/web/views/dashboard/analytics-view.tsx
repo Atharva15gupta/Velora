@@ -399,7 +399,7 @@ export const AnalyticsView = () => {
                       (ticket: AnalyticsData["unresolvedTickets"][number]) => (
                         <Link
                           key={ticket.id}
-                          href={`/inbox/${ticket.id}`}
+                          href={`/dashboard/inbox/${ticket.id}`}
                           className="flex items-center justify-between p-2 rounded-lg border border-neutral-200/70  group cursor-pointer"
                         >
                           <div className="flex items-center gap-3 min-w-0">

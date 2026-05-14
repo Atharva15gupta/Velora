@@ -121,11 +121,11 @@ export const ConversationMenu = () => {
         ) : conversations.length > 0 ? (
           conversations.map((conversation: ConversationItems) => (
             <Link
-              href={`/inbox/${conversation.id}`}
+              href={`/dashboard/inbox/${conversation.id}`}
               key={conversation.id}
-              className={`h-[4.3rem] relative w-full flex items-center p-4 gap-2 justify-between bg-neutral-400/5  rounded-xl border  hover:border-neutral-300 cursor-pointer ${pathname === `/inbox/${conversation.id}` ? "border-neutral-300" : "border-neutral-300/15"}`}
+              className={`h-[4.3rem] relative w-full flex items-center p-4 gap-2 justify-between bg-neutral-400/5  rounded-xl border  hover:border-neutral-300 cursor-pointer ${pathname === `/dashboard/inbox/${conversation.id}` ? "border-neutral-300" : "border-neutral-300/15"}`}
             >
-              {pathname === `/inbox/${conversation.id}` && (
+              {pathname === `/dashboard/inbox/${conversation.id}` && (
                 <div className="absolute inset-y-3 left-0 w-1 h-2/3 bg-neutral-300 rounded-e-sm" />
               )}
               <div className="flex items-center gap-3">
