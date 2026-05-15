@@ -2,6 +2,14 @@ import { Request, Response } from "express";
 import { prisma } from "@workspace/db";
 import { mergeJson, normalizeSuggestions } from "../utils/widget/widgetSettings";
 
+const BRAND_BLUE = "#406AAF";
+const LEGACY_THEME_COLOR = "#047857";
+
+const normalizeThemeColor = (value?: string | null) => {
+  if (!value) return undefined;
+  return value.trim().toLowerCase() === LEGACY_THEME_COLOR ? BRAND_BLUE : value;
+};
+
 export const createOrUpdateWidgetSettings = async (req: Request, res: Response) => {
   try {
     const workspace = req.workspace!;
@@ -20,7 +28,7 @@ export const createOrUpdateWidgetSettings = async (req: Request, res: Response) 
       greetMessage: body.greetMessage ?? existing?.greetMessage,
       themeMode: body.themeMode ?? existing?.themeMode,
       gradientFrom: body.gradientFrom ?? existing?.gradientFrom,
-      themeColor: body.themeColor ?? existing?.themeColor,
+      themeColor: normalizeThemeColor(body.themeColor ?? existing?.themeColor),
 
       defaultSuggestions: normalizeSuggestions(body.defaultSuggestions) ??
         existing?.defaultSuggestions ??
@@ -74,7 +82,7 @@ export const getWidgetSettings = async (req: Request, res: Response) => {
         greetMessage: settings.greetMessage,
         themeMode: settings.themeMode,
         gradientFrom: settings.gradientFrom,
-        themeColor: settings.themeColor,
+        themeColor: normalizeThemeColor(settings.themeColor) ?? BRAND_BLUE,
         defaultSuggestions: settings.defaultSuggestions,
         whatsNewSection: settings.whatsNewSection,
         featuredArticlesSection: settings.featuredArticlesSection,

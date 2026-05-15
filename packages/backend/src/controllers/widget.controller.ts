@@ -7,6 +7,13 @@ import { randomUUID } from "crypto";
 
 const SESSION_DURATION_MS = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
 const SESSION_EXTENSION_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const BRAND_BLUE = "#406AAF";
+const LEGACY_THEME_COLOR = "#047857";
+
+const normalizeThemeColor = (value?: string | null) => {
+  if (!value) return undefined;
+  return value.trim().toLowerCase() === LEGACY_THEME_COLOR ? BRAND_BLUE : value;
+};
 
 export const initWidget = async (req: Request, res: Response) => {
   try {
@@ -28,7 +35,7 @@ export const initWidget = async (req: Request, res: Response) => {
       greetMessage: widgetSettings?.greetMessage ?? null,
       themeMode: widgetSettings?.themeMode ?? null,
       gradientFrom: widgetSettings?.gradientFrom ?? null,
-      themeColor: widgetSettings?.themeColor ?? null,
+      themeColor: normalizeThemeColor(widgetSettings?.themeColor) ?? null,
       defaultSuggestions: widgetSettings?.defaultSuggestions ?? null,
       whatsNewSection: widgetSettings?.whatsNewSection ?? null,
       featuredArticlesSection: widgetSettings?.featuredArticlesSection ?? null,

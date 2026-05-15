@@ -49,6 +49,8 @@ const buildSection = (
 const getColorValue = (value: string) =>
   /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(value) ? value : "#000000";
 
+const BRAND_BLUE = "#406AAF";
+
 const normalizeUrlForSave = (value: string) => {
   const trimmed = value.trim();
   if (!trimmed) return null;
@@ -70,7 +72,7 @@ export default function WidgetCustomizationView() {
       greetMessage: data?.greetMessage ?? "",
       themeMode: data?.themeMode === "dark" ? "dark" : "light",
       gradientFrom: data?.gradientFrom ?? "",
-      themeColor: data?.themeColor ?? "",
+      themeColor: data?.themeColor ?? BRAND_BLUE,
       whatsNewSection: buildSection(data?.whatsNewSection ?? null, true),
       featuredArticlesSection: buildSection(
         data?.featuredArticlesSection ?? null,

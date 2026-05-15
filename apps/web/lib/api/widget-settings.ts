@@ -1,5 +1,11 @@
 import { axiosInstance } from "../axios";
 
+const BRAND_BLUE = "#406AAF";
+const LEGACY_THEME_COLOR = "#047857";
+
+const normalizeThemeColor = (value: string | null) =>
+  value?.trim().toLowerCase() === LEGACY_THEME_COLOR ? BRAND_BLUE : value;
+
 export type WidgetSectionItem = {
   title: string;
   description?: string;
@@ -38,7 +44,12 @@ export type WidgetSettingsPayload = Omit<
 
 export const getWidgetSettings = async (workspaceId: string) => {
   const { data } = await axiosInstance.get(`/workspace/${workspaceId}/widget-setting`);
-  return data.widgetSettings as WidgetSettings;
+  const widgetSettings = data.widgetSettings as WidgetSettings;
+
+  return {
+    ...widgetSettings,
+    themeColor: normalizeThemeColor(widgetSettings.themeColor),
+  };
 };
 
 export const updateWidgetSettings = async (
