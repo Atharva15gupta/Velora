@@ -158,17 +158,24 @@ export const ChatScreen = () => {
       { from: "user", content: text, id: tempId },
     ]);
 
-    if (isEscalated && conversationId) {
-      await sendMessageMutation.mutateAsync({
-        workspaceId: workspace.id,
-        conversationId,
-        message: text,
-      });
-
-      return;
-    }
-
     try {
+      if (isEscalated && conversationId) {
+        const res = await sendMessageMutation.mutateAsync({
+          workspaceId: workspace.id,
+          conversationId,
+          message: text,
+        });
+
+        if (res?.status === "human_takeover") {
+          pushMessage(
+            "assistant",
+            "A team member has this chat open and will reply here.",
+          );
+        }
+
+        return;
+      }
+
       if (!customerId || !conversationId) {
         const data = await startConversationMutation.mutateAsync({
           workspaceId: workspace.id,
@@ -204,6 +211,11 @@ export const ChatScreen = () => {
 
       if (res?.status === "ok" && res.reply) {
         streamAssistantReply(res.reply);
+      } else if (res?.status === "human_takeover") {
+        pushMessage(
+          "assistant",
+          "A team member has this chat open and will reply here.",
+        );
       } else if (res?.status === "expired") {
         setSession({ customerId: null, conversationId: null });
         pushMessage("assistant", "Your session expired. Starting a new chat.");

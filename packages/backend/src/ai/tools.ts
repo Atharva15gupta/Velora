@@ -48,6 +48,7 @@ export const vectorSearchTool = tool(
     description: "Search company knowledge base for relevant information",
     schema: z.object({
       query: z.string().describe("Search query text"),
+      workspaceId: z.string().optional(),
     }),
   }
 );
@@ -72,7 +73,10 @@ export const escalateConversationTool = tool(
     name: "escalate_conversation",
     description:
       "Escalate the conversation to a human agent when the user asks for human help or is unhappy.",
-    schema: z.object({}),
+    schema: z.object({
+      workspaceId: z.string().optional(),
+      conversationId: z.string().optional(),
+    }),
   }
 );
 
@@ -93,7 +97,9 @@ export const resolveConversationTool = tool(
     name: "resolve_conversation",
     description:
       "Mark the conversation as resolved when the user confirms their issue is solved.",
-    schema: z.object({}),
+    schema: z.object({
+      conversationId: z.string().optional(),
+    }),
   }
 );
 

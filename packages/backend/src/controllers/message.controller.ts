@@ -6,6 +6,10 @@ import { simplifyMessage } from "../utils/messages/simplifyMessages";
 import { appendHumanMessage } from "../utils/messages/appendHumanMessage";
 
 const isDefined = <T>(value: T | null | undefined): value is T => value != null;
+const isGreeting = (message: string) =>
+  /^(hi|hii|hello|hey|yo|good\s+(morning|afternoon|evening))[\s!.?]*$/i.test(
+    message.trim(),
+  );
 
 export const createMessage = async (req: Request, res: Response) => {
   try {
@@ -67,19 +71,49 @@ export const createMessage = async (req: Request, res: Response) => {
       });
     }
 
-    console.time("chatbot.invoke");
-    const finalState = await chatbot.invoke(
-      {
+    let finalState: { messages: BaseMessage[] };
+
+    try {
+      console.time("chatbot.invoke");
+      finalState = await chatbot.invoke(
+        {
+          messages: [
+            new HumanMessage({
+              content: message,
+              additional_kwargs: { timestamp: Date.now() },
+            }),
+          ],
+        },
+        config,
+      );
+      console.timeEnd("chatbot.invoke");
+    } catch (error) {
+      console.timeEnd("chatbot.invoke");
+      console.error("AI response failed:", error);
+
+      const fallbackReply = isGreeting(message)
+        ? "Hello! How can I help you today?"
+        : "I'm having trouble generating an answer right now. Please try again in a moment.";
+
+      await chatbot.updateState(config, {
         messages: [
           new HumanMessage({
             content: message,
             additional_kwargs: { timestamp: Date.now() },
           }),
+          new AIMessage({
+            content: fallbackReply,
+            additional_kwargs: { timestamp: Date.now() },
+          }),
         ],
-      },
-      config,
-    );
-    console.timeEnd("chatbot.invoke");
+      });
+
+      return res.status(201).json({
+        message: "Message saved with fallback reply",
+        reply: fallbackReply,
+        status: "ok",
+      });
+    }
 
     const last = finalState.messages[
       finalState.messages.length - 1
@@ -93,6 +127,12 @@ export const createMessage = async (req: Request, res: Response) => {
         .filter((c: any) => c.type === "text")
         .map((c: any) => c.text)
         .join("\n");
+    }
+
+    if (!replyText.trim()) {
+      replyText = isGreeting(message)
+        ? "Hello! How can I help you today?"
+        : "I couldn't generate a specific answer for that yet. Could you share a little more detail?";
     }
 
     return res

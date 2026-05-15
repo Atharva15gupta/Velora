@@ -199,9 +199,21 @@ async function toolNode(state: GraphState, config?: RunnableConfig) {
       args,
     } as any);
 
-    if (typeof observation !== "string") {
+    if (observation instanceof ToolMessage) {
       results.push(observation);
+      continue;
     }
+
+    results.push(
+      new ToolMessage({
+        content:
+          typeof observation === "string"
+            ? observation
+            : JSON.stringify(observation),
+        tool_call_id: toolCall.id ?? toolCall.name,
+        name: toolCall.name,
+      }),
+    );
   }
 
   return {
