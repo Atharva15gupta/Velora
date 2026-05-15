@@ -50,6 +50,23 @@ export const createMessage = async (req: Request, res: Response) => {
       },
     };
 
+    if (conversation.status === "escalated") {
+      await chatbot.updateState(config, {
+        messages: [
+          new HumanMessage({
+            content: message,
+            additional_kwargs: { timestamp: Date.now() },
+          }),
+        ],
+      });
+
+      return res.status(201).json({
+        message: "Message saved for human support",
+        reply: null,
+        status: "human_takeover",
+      });
+    }
+
     console.time("chatbot.invoke");
     const finalState = await chatbot.invoke(
       {

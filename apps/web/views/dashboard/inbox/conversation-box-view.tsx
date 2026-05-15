@@ -19,6 +19,7 @@ import {
   useDeleteConversation,
   useUpdateConversationStatus,
 } from "@/hooks/useConversation";
+import { updateConversationStatus } from "@/lib/api/conversation";
 import { ConversationStatusButton } from "@/components/dashboard/inbox/conversation-status-button";
 import { Hint } from "@workspace/ui/components/hint";
 import {
@@ -32,6 +33,7 @@ import {
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
 import { ChatMessagesSkeleton } from "@/skeletons/chatMessagesSkeleton";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ChatMessage {
   from: "user" | "assistant";
@@ -53,6 +55,8 @@ export const ConversationBoxView = ({
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [open, setOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const isDeletingRef = useRef(false);
+  const queryClient = useQueryClient();
   const { workspace } = useWorkspaceStore();
   const {
     data: historyData,
@@ -80,6 +84,28 @@ export const ConversationBoxView = ({
   useEffect(() => {
     scrollToBottom();
   }, [messages, isSendingMessage]);
+
+  useEffect(() => {
+    if (!conversationId) return;
+
+    updateConversationStatus(conversationId, "escalated").catch((error) => {
+      console.error("Failed to pause AI for open conversation:", error);
+    });
+    queryClient.setQueryData(["conversationStatus", conversationId], {
+      status: "escalated",
+    });
+
+    return () => {
+      if (isDeletingRef.current) return;
+
+      updateConversationStatus(conversationId, "unresolved").catch((error) => {
+        console.error("Failed to resume AI after closing conversation:", error);
+      });
+      queryClient.setQueryData(["conversationStatus", conversationId], {
+        status: "unresolved",
+      });
+    };
+  }, [conversationId, queryClient]);
 
   useEffect(() => {
     // if (historyError) {
@@ -141,6 +167,7 @@ export const ConversationBoxView = ({
 
   const handleDeleteConversation = async () => {
     if (!conversationId) return;
+    isDeletingRef.current = true;
     await deleteMutation.mutateAsync(conversationId);
     setOpen(false);
   };

@@ -210,6 +210,15 @@ export const ChatScreen = () => {
         setCurrentScreen("home");
       }
     } catch (error) {
+      const status = (error as { response?: { status?: number } } | null)
+        ?.response?.status;
+      if (status === 404) {
+        setSession({ customerId: null, conversationId: null });
+        setMessages([]);
+        setShowIdentityForm(false);
+        setCurrentScreen("home");
+        return;
+      }
       console.error("Error sending message:", error);
       pushMessage("assistant", "Sorry, I ran into an issue. Please try again in a moment.");
     }

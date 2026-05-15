@@ -14,6 +14,8 @@ export const useGetConversations = (workspaceId: string, status: string) => {
     queryFn: () => getAllConversations(workspaceId, status),
     enabled: !!workspaceId,
     retry: false,
+    refetchInterval: 3000,
+    refetchIntervalInBackground: true,
     gcTime: 5 * 60 * 1000,
   });
 };
@@ -56,6 +58,26 @@ export const useDeleteConversation = () => {
   return useMutation({
     mutationFn: (conversationId: string) => deleteConversation(conversationId),
     onSuccess: (_data, conversationId) => {
+      queryClient.setQueriesData(
+        { queryKey: ["conversations"] },
+        (oldData: unknown) => {
+          if (
+            !oldData ||
+            typeof oldData !== "object" ||
+            !("conversations" in oldData)
+          ) {
+            return oldData;
+          }
+
+          const data = oldData as { conversations?: { id: string }[] };
+          return {
+            ...data,
+            conversations: data.conversations?.filter(
+              (conversation) => conversation.id !== conversationId,
+            ),
+          };
+        },
+      );
       queryClient.invalidateQueries({ queryKey: ["conversations"] });
       queryClient.removeQueries({
         queryKey: ["conversationStatus", conversationId],
