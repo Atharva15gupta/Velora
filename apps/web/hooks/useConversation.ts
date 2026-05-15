@@ -14,8 +14,6 @@ export const useGetConversations = (workspaceId: string, status: string) => {
     queryFn: () => getAllConversations(workspaceId, status),
     enabled: !!workspaceId,
     retry: false,
-    refetchInterval: 3000,
-    refetchIntervalInBackground: true,
     gcTime: 5 * 60 * 1000,
   });
 };

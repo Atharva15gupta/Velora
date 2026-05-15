@@ -4,6 +4,7 @@ import { getChatbot } from "../config/langgraph";
 import { HumanMessage, AIMessage, BaseMessage } from "@langchain/core/messages";
 import { simplifyMessage } from "../utils/messages/simplifyMessages";
 import { appendHumanMessage } from "../utils/messages/appendHumanMessage";
+import { publishConversationEvent } from "../services/conversationEvents.service";
 
 const isDefined = <T>(value: T | null | undefined): value is T => value != null;
 const isGreeting = (message: string) =>
@@ -63,6 +64,7 @@ export const createMessage = async (req: Request, res: Response) => {
           }),
         ],
       });
+      publishConversationEvent({ type: "message", conversationId });
 
       return res.status(201).json({
         message: "Message saved for human support",
@@ -107,6 +109,7 @@ export const createMessage = async (req: Request, res: Response) => {
           }),
         ],
       });
+      publishConversationEvent({ type: "message", conversationId });
 
       return res.status(201).json({
         message: "Message saved with fallback reply",
@@ -134,6 +137,7 @@ export const createMessage = async (req: Request, res: Response) => {
         ? "Hello! How can I help you today?"
         : "I couldn't generate a specific answer for that yet. Could you share a little more detail?";
     }
+    publishConversationEvent({ type: "message", conversationId });
 
     return res
       .status(201)
@@ -346,6 +350,7 @@ export const sendHumanReply = async (req: Request, res: Response) => {
       },
       content: message.trim(),
     });
+    publishConversationEvent({ type: "message", conversationId });
 
     return res.json({
       success: true,

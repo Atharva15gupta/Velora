@@ -19,6 +19,7 @@ import {
   IdentityFormData,
 } from "@/components/chatScreen/IdentityForm";
 import { ChatInput, ChatInputData } from "@/components/chatScreen/ChatInput";
+import { useConversationEvents } from "@/hooks/useConversationEvents";
 
 interface ChatMessage {
   from: "user" | "assistant";
@@ -58,6 +59,13 @@ export const ChatScreen = () => {
   const messageSignature = getMessageSignature(messages);
   const timezoneOffset = new Date().getTimezoneOffset();
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  useConversationEvents(workspace?.id || "", conversationId || "", () => {
+    setSession({ customerId: null, conversationId: null });
+    setMessages([]);
+    setShowIdentityForm(false);
+    setCurrentScreen("home");
+  });
 
   const scrollToBottom = () => {
     if (!scrollContainerRef.current) return;

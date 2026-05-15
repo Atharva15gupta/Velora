@@ -11,6 +11,7 @@ import {
   requireWorkspacePublic,
 } from "../middlewares/requireWorkspace";
 import { verifyAuth } from "../middlewares/auth.middleware";
+import { subscribeToConversation } from "../services/conversationEvents.service";
 
 const route: Router = Router();
 
@@ -29,6 +30,17 @@ route.get(
   "/:workspaceId/conversations/:conversationId/messages/last",
   requireWorkspacePublic,
   getLastMessage
+);
+route.get(
+  "/:workspaceId/conversations/:conversationId/events",
+  requireWorkspacePublic,
+  (req, res) => {
+    const { conversationId } = req.params;
+    if (!conversationId) {
+      return res.status(400).json({ message: "Conversation ID is required" });
+    }
+    return subscribeToConversation(conversationId, res);
+  }
 );
 
 // Dashboard/admin endpoints

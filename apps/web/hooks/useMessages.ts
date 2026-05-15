@@ -11,8 +11,6 @@ export const useGetAllMessages = (
     queryFn: () => getConversationMessages(workspaceId, conversationId),
     enabled: !!workspaceId && !!conversationId,
     retry: false,
-    refetchInterval: 3000,
-    refetchIntervalInBackground: true,
     gcTime: 5 * 60 * 1000,
   });
 };

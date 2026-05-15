@@ -34,6 +34,8 @@ import {
 } from "@workspace/ui/components/dialog";
 import { ChatMessagesSkeleton } from "@/skeletons/chatMessagesSkeleton";
 import { useQueryClient } from "@tanstack/react-query";
+import { useConversationEvents } from "@/hooks/useConversationEvents";
+import { useTransitionRouter } from "next-view-transitions";
 
 interface ChatMessage {
   from: "user" | "assistant";
@@ -60,6 +62,7 @@ export const ConversationBoxView = ({
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const isDeletingRef = useRef(false);
   const queryClient = useQueryClient();
+  const router = useTransitionRouter();
   const { workspace } = useWorkspaceStore();
   const {
     data: historyData,
@@ -73,6 +76,10 @@ export const ConversationBoxView = ({
   const isSendingMessage = sendMessageMutation.isPending;
   const deleteMutation = useDeleteConversation();
   const messageSignature = getMessageSignature(messages);
+
+  useConversationEvents(workspace?.id || "", conversationId, () => {
+    router.push("/dashboard/inbox");
+  });
 
   const scrollToBottom = () => {
     if (!scrollContainerRef.current) return;

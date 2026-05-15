@@ -7,6 +7,7 @@ import { simplifyMessage } from "../utils/messages/simplifyMessages";
 import { deleteLangGraphThread } from "../utils/messages/deleteLangGraphThread";
 import { getCustomersCount } from "../utils/subscriptions/getCustomersCount";
 import { PLAN_FEATURES } from "../constants/plans";
+import { publishConversationEvent } from "../services/conversationEvents.service";
 
 const isDefined = <T>(value: T | null | undefined): value is T => value != null;
 
@@ -234,6 +235,7 @@ export const updateConversationStatus = async (req: Request, res: Response) => {
       where: { id: conversationId },
       data: { status },
     });
+    publishConversationEvent({ type: "status", conversationId, status });
 
     return res
       .status(200)
@@ -257,6 +259,7 @@ export const deleteConversation = async (req: Request, res: Response) => {
     if (!conversation) {
       return res.status(404).json({ message: "Conversation not found" });
     }
+    publishConversationEvent({ type: "deleted", conversationId });
     await deleteLangGraphThread(conversation.threadId);
     await prisma.notification.deleteMany({
       where: {

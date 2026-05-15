@@ -89,8 +89,6 @@ export const useConversationMessages = (
     queryKey: ["conversationMessages", conversationId],
     queryFn: () => getConversationMessages(workspaceId, conversationId),
     enabled: !!workspaceId && !!conversationId,
-    refetchInterval: 3000,
-    refetchIntervalInBackground: true,
   });
 
 export const useLastMessage = (workspaceId: string, conversationId: string) =>
