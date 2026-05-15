@@ -55,10 +55,13 @@ export const useDeleteConversation = () => {
   const router = useTransitionRouter();
   return useMutation({
     mutationFn: (conversationId: string) => deleteConversation(conversationId),
-    onSuccess: () => {
+    onSuccess: (_data, conversationId) => {
       queryClient.invalidateQueries({ queryKey: ["conversations"] });
-      queryClient.invalidateQueries({ queryKey: ["conversationStatus"] });
-      router.push("/inbox");
+      queryClient.removeQueries({
+        queryKey: ["conversationStatus", conversationId],
+      });
+      queryClient.removeQueries({ queryKey: ["messages"], exact: false });
+      router.push("/dashboard/inbox");
     },
     onError: (error) => {
       toast.error(
