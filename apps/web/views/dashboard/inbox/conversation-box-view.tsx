@@ -41,6 +41,9 @@ interface ChatMessage {
   id: string;
 }
 
+const getMessageSignature = (messages: ChatMessage[]) =>
+  messages.map((message) => `${message.from}:${message.content}`).join("|");
+
 export const ChatInputSchema = z.object({
   message: z.string().trim().min(1, "Message cannot be empty"),
 });
@@ -69,6 +72,7 @@ export const ConversationBoxView = ({
   const sendMessageMutation = useCreateMessage();
   const isSendingMessage = sendMessageMutation.isPending;
   const deleteMutation = useDeleteConversation();
+  const messageSignature = getMessageSignature(messages);
 
   const scrollToBottom = () => {
     if (!scrollContainerRef.current) return;
@@ -83,7 +87,7 @@ export const ConversationBoxView = ({
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isSendingMessage]);
+  }, [messageSignature, isSendingMessage]);
 
   useEffect(() => {
     if (!conversationId) return;
@@ -115,7 +119,12 @@ export const ConversationBoxView = ({
 
     if (historyLoading || !historyData) return;
 
-    setMessages(historyData.messages);
+    const nextMessages = historyData.messages ?? [];
+    setMessages((prev) =>
+      getMessageSignature(prev) === getMessageSignature(nextMessages)
+        ? prev
+        : nextMessages,
+    );
   }, [historyLoading, historyError, historyData]);
 
   const form = useForm<z.infer<typeof ChatInputSchema>>({

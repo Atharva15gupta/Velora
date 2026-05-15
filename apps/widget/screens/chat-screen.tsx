@@ -26,6 +26,9 @@ interface ChatMessage {
   id: string;
 }
 
+const getMessageSignature = (messages: ChatMessage[]) =>
+  messages.map((message) => `${message.from}:${message.content}`).join("|");
+
 export const ChatScreen = () => {
   const { setCurrentScreen } = useWidgetScreenStore();
   const { workspace } = useWorkspaceStore();
@@ -52,6 +55,7 @@ export const ChatScreen = () => {
   const isSendingMessage =
     startConversationMutation.isPending || sendMessageMutation.isPending;
   const isIdentifying = identifyCustomerMutation.isPending;
+  const messageSignature = getMessageSignature(messages);
   const timezoneOffset = new Date().getTimezoneOffset();
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -91,7 +95,7 @@ export const ChatScreen = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, showIdentityForm, isSendingMessage]);
+  }, [messageSignature, showIdentityForm, isSendingMessage]);
 
 
   useEffect(() => {
@@ -114,6 +118,17 @@ export const ChatScreen = () => {
     const serverMessages: ChatMessage[] = historyData.messages || [];
 
     setMessages((prev) => {
+      const persistedLocalMessages = prev.filter(
+        (message) => !message.id.startsWith("temp-"),
+      );
+
+      if (
+        getMessageSignature(persistedLocalMessages) ===
+        getMessageSignature(serverMessages)
+      ) {
+        return prev;
+      }
+
       if (prev.length > 0 && serverMessages.length === prev.filter(m => !m.id.startsWith("temp-")).length) {
         const lastServerMsg = serverMessages[serverMessages.length - 1];
         const lastLocalRealMsg = [...prev].reverse().find(m => !m.id.startsWith("temp-"));
