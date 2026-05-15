@@ -11,6 +11,8 @@ export const useGetAllMessages = (
     queryFn: () => getConversationMessages(workspaceId, conversationId),
     enabled: !!workspaceId && !!conversationId,
     retry: false,
+    refetchInterval: 3000,
+    refetchIntervalInBackground: true,
     gcTime: 5 * 60 * 1000,
   });
 };
@@ -27,8 +29,11 @@ export const useCreateMessage = () => {
       conversationId: string;
       message: string;
     }) => createMessage(workspaceId, conversationId, message),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["messages"] });
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["messages", variables.workspaceId, variables.conversationId],
+      });
+      queryClient.invalidateQueries({ queryKey: ["conversationMessages"] });
     },
     onError: (error) => {
       toast.error(

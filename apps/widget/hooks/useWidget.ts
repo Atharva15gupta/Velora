@@ -72,8 +72,11 @@ export const useSendMessage = () => {
       message: string;
     }) => sendMessage(workspaceId, conversationId, message),
 
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["last-message"] });
+      queryClient.invalidateQueries({
+        queryKey: ["conversationMessages", variables.conversationId],
+      });
     },
   });
 };
@@ -86,11 +89,8 @@ export const useConversationMessages = (
     queryKey: ["conversationMessages", conversationId],
     queryFn: () => getConversationMessages(workspaceId, conversationId),
     enabled: !!workspaceId && !!conversationId,
-    // staleTime:Infinity,
-    // gcTime:Infinity,
-    refetchInterval: (query) => {
-      return query.state.data?.status === "escalated" ? 10000 : false;
-    },
+    refetchInterval: 3000,
+    refetchIntervalInBackground: true,
   });
 
 export const useLastMessage = (workspaceId: string, conversationId: string) =>

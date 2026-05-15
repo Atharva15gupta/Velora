@@ -22,19 +22,15 @@ export const appendHumanMessage = async ({
     },
   };
 
-  await chatbot.updateState(
-    config,
-    {
-      messages: [
-        new AIMessage({
-          content,
-          additional_kwargs: {
-            source: "human_agent",
-            timestamp: Date.now(),
-          },
-        }),
-      ],
-    },
-    "llmCall",
-  );
+  await chatbot.updateState(config, {
+    messages: [
+      new AIMessage({
+        content,
+        additional_kwargs: {
+          source: "human_agent",
+          timestamp: Date.now(),
+        },
+      }),
+    ],
+  });
 };
