@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 const getEventsUrl = (workspaceId: string, conversationId: string) => {
@@ -15,6 +15,11 @@ export const useConversationEvents = (
   onDeleted?: () => void,
 ) => {
   const queryClient = useQueryClient();
+  const onDeletedRef = useRef(onDeleted);
+
+  useEffect(() => {
+    onDeletedRef.current = onDeleted;
+  }, [onDeleted]);
 
   useEffect(() => {
     if (!workspaceId || !conversationId) return;
@@ -43,7 +48,7 @@ export const useConversationEvents = (
         queryKey: ["conversationStatus", conversationId],
       });
       queryClient.invalidateQueries({ queryKey: ["conversations"] });
-      onDeleted?.();
+      onDeletedRef.current?.();
     });
 
     events.onerror = () => {
@@ -53,5 +58,5 @@ export const useConversationEvents = (
     return () => {
       events.close();
     };
-  }, [conversationId, onDeleted, queryClient, workspaceId]);
+  }, [conversationId, queryClient, workspaceId]);
 };
