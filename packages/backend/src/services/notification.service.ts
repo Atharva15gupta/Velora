@@ -126,7 +126,7 @@ export const escalateConversation = async (
         customerDisplayName,
         customerEmail,
         messagePreview,
-        conversationUrl: `${baseUrl}/inbox/${conversationId}`,
+        conversationUrl: `${baseUrl}/dashboard/inbox/${conversationId}`,
       });
     }
   } catch (error) {

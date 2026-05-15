@@ -10,7 +10,7 @@ import { Loader } from "@workspace/ui/components/loader";
 export const LoadingScreen = ({ workspaceId }: { workspaceId: string }) => {
   const { setCurrentScreen } = useWidgetScreenStore();
   const { setWorkspace } = useWorkspaceStore();
-  const { customerId, setCustomerId } = useWidgetSessionStore();
+  const { customerId, setCustomerId, setSession } = useWidgetSessionStore();
 
   const { data, isLoading, isError } = useWidgetInitialization(
     workspaceId,
@@ -30,7 +30,7 @@ export const LoadingScreen = ({ workspaceId }: { workspaceId: string }) => {
     }
 
     if (!data.session?.active) {
-      setCustomerId(null);
+      setSession({ customerId: null, conversationId: null });
       setCurrentScreen("home");
       return;
     }
@@ -46,6 +46,7 @@ export const LoadingScreen = ({ workspaceId }: { workspaceId: string }) => {
     setCurrentScreen,
     setWorkspace,
     setCustomerId,
+    setSession,
   ]);
 
   return (

@@ -57,7 +57,7 @@ export const initWidget = async (req: Request, res: Response) => {
     });
 
     if (!customer) {
-      return res.status(404).json({
+      return res.status(200).json({
         message: "Customer not found",
         workspace: workspaceDetails,
         session: { active: false, reason: "customer_not_found" },

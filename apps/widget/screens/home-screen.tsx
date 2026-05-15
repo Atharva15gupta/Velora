@@ -20,7 +20,7 @@ export interface RecentInfo {
 export const HomeScreen = () => {
   const { setCurrentScreen } = useWidgetScreenStore();
   const { workspace } = useWorkspaceStore();
-  const { conversationId } = useWidgetSessionStore();
+  const { conversationId, setSession } = useWidgetSessionStore();
   const brandName = workspace?.brandName || workspace?.name || "Velora";
   const whatsNewSection = workspace?.whatsNewSection;
   const featuredArticlesSection = workspace?.featuredArticlesSection;
@@ -48,13 +48,20 @@ export const HomeScreen = () => {
     data,
     isLoading,
     isError,
+    error,
   } = useLastMessage(workspace?.id || "", conversationId || "");
 
   useEffect(() => {
     if (isError) {
+      const status = (error as { response?: { status?: number } } | null)
+        ?.response?.status;
+      if (status === 404) {
+        setSession({ customerId: null, conversationId: null });
+        return;
+      }
       setCurrentScreen("error");
     }
-  }, [isError, setCurrentScreen]);
+  }, [error, isError, setCurrentScreen, setSession]);
 
   const recent: RecentInfo | null = useMemo(() => {
     if (!data || !data.lastMessage) return null;

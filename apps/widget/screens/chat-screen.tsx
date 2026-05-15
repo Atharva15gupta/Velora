@@ -40,6 +40,7 @@ export const ChatScreen = () => {
     data: historyData,
     isLoading: historyLoading,
     isError: historyError,
+    error: historyErrorDetails,
   } = useConversationMessages(workspace?.id || "", conversationId || "");
 
   const isEscalated = historyData?.status === "escalated";
@@ -95,6 +96,14 @@ export const ChatScreen = () => {
 
   useEffect(() => {
     if (historyError) {
+      const status = (
+        historyErrorDetails as { response?: { status?: number } } | null
+      )?.response?.status;
+      if (status === 404) {
+        setSession({ customerId: null, conversationId: null });
+        setCurrentScreen("home");
+        return;
+      }
       console.error("Error fetching messages");
       setCurrentScreen("error");
       return;
@@ -128,7 +137,7 @@ export const ChatScreen = () => {
     }
 
     setShowIdentityForm(historyData.isIdentified === false);
-  }, [historyError, historyData, setCurrentScreen]);
+  }, [historyError, historyErrorDetails, historyData, setCurrentScreen, setSession]);
 
   const pushMessage = (from: "user" | "assistant", content: string) => {
     setMessages((prev) => [
